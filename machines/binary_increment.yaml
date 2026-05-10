@@ -1,0 +1,35 @@
+name: "binary_increment"
+description: "Binary sayıyı bir artırır. Örnek: 1011 -> 1100"
+
+# Strateji:
+#   q0      : sağa git, sayı sonuna ulaş
+#   q_carry : sağdan sola carry uygula
+#   q_accept: kabul
+#
+# Sola taşma önlemi:
+#   Eğer q_carry B görürse (tüm bitler 1'di, örn 1111→10000),
+#   '1' yaz ve sağa dönerek hemen kabul et — sola gitme yok.
+#   Diğer durumlarda (0 ya da 1 yazıp) q_accept'e geç ve sağa hareket.
+#   q_accept sadece bir "son adım" durumu; gerçekte hemen kabul tetiklenir.
+
+states: [q0, q_carry, q_accept]
+input_alphabet: ["0", "1"]
+tape_alphabet: ["0", "1", "B"]
+blank: "B"
+start_state: q0
+accept_states: [q_accept]
+reject_states: []
+
+transitions:
+  # --- q0: sağa tara ---
+  - {state: q0,     read: "0", next: q0,       write: "0", move: R}
+  - {state: q0,     read: "1", next: q0,       write: "1", move: R}
+  - {state: q0,     read: "B", next: q_carry,  write: "B", move: L}
+
+  # --- q_carry: sağdan sola carry ---
+  # 0 gördük: 1 yaz, kabul et (sağa bir adım at — şerit sonunu geçmemek için)
+  - {state: q_carry, read: "0", next: q_accept, write: "1", move: R}
+  # 1 gördük: 0 yaz, carry devam
+  - {state: q_carry, read: "1", next: q_carry,  write: "0", move: L}
+  # B gördük (tüm bitler 1'di): yeni MSB olarak 1 yaz, sağa dönerek kabul
+  - {state: q_carry, read: "B", next: q_accept, write: "1", move: R}
