@@ -1,0 +1,112 @@
+name: "unary_to_binary"
+description: "Unary sayiyi kucuk girdiler icin binary gosterime cevirir. Ornek: 111 -> 11"
+
+states:
+  - q_count0
+  - q_count1
+  - q_count2
+  - q_count3
+  - q_count4
+  - q_count5
+  - q_count6
+  - q_count7
+  - q_count8
+  - q_back_1
+  - q_back_2
+  - q_back_3
+  - q_back_4
+  - q_back_5
+  - q_back_6
+  - q_back_7
+  - q_back_8
+  - q_w1_0
+  - q_w2_0
+  - q_w2_1
+  - q_w3_0
+  - q_w3_1
+  - q_w4_0
+  - q_w4_1
+  - q_w4_2
+  - q_w5_0
+  - q_w5_1
+  - q_w5_2
+  - q_w6_0
+  - q_w6_1
+  - q_w6_2
+  - q_w7_0
+  - q_w7_1
+  - q_w7_2
+  - q_w8_0
+  - q_w8_1
+  - q_w8_2
+  - q_w8_3
+  - q_clear
+  - q_accept
+
+input_alphabet: ["1"]
+tape_alphabet: ["0", "1", "B", "X"]
+blank: "B"
+start_state: q_count0
+accept_states: [q_accept]
+reject_states: []
+
+transitions:
+  - {state: q_count0, read: "1", next: q_count1, write: "1", move: R}
+  - {state: q_count0, read: "B", next: q_accept, write: "0", move: R}
+  - {state: q_count1, read: "1", next: q_count2, write: "1", move: R}
+  - {state: q_count1, read: "B", next: q_back_1, write: "B", move: L}
+  - {state: q_count2, read: "1", next: q_count3, write: "1", move: R}
+  - {state: q_count2, read: "B", next: q_back_2, write: "B", move: L}
+  - {state: q_count3, read: "1", next: q_count4, write: "1", move: R}
+  - {state: q_count3, read: "B", next: q_back_3, write: "B", move: L}
+  - {state: q_count4, read: "1", next: q_count5, write: "1", move: R}
+  - {state: q_count4, read: "B", next: q_back_4, write: "B", move: L}
+  - {state: q_count5, read: "1", next: q_count6, write: "1", move: R}
+  - {state: q_count5, read: "B", next: q_back_5, write: "B", move: L}
+  - {state: q_count6, read: "1", next: q_count7, write: "1", move: R}
+  - {state: q_count6, read: "B", next: q_back_6, write: "B", move: L}
+  - {state: q_count7, read: "1", next: q_count8, write: "1", move: R}
+  - {state: q_count7, read: "B", next: q_back_7, write: "B", move: L}
+  - {state: q_count8, read: "B", next: q_back_8, write: "B", move: L}
+
+  - {state: q_back_1, read: "1", next: q_back_1, write: "1", move: L}
+  - {state: q_back_1, read: "B", next: q_w1_0, write: "B", move: R}
+  - {state: q_back_2, read: "1", next: q_back_2, write: "1", move: L}
+  - {state: q_back_2, read: "B", next: q_w2_0, write: "B", move: R}
+  - {state: q_back_3, read: "1", next: q_back_3, write: "1", move: L}
+  - {state: q_back_3, read: "B", next: q_w3_0, write: "B", move: R}
+  - {state: q_back_4, read: "1", next: q_back_4, write: "1", move: L}
+  - {state: q_back_4, read: "B", next: q_w4_0, write: "B", move: R}
+  - {state: q_back_5, read: "1", next: q_back_5, write: "1", move: L}
+  - {state: q_back_5, read: "B", next: q_w5_0, write: "B", move: R}
+  - {state: q_back_6, read: "1", next: q_back_6, write: "1", move: L}
+  - {state: q_back_6, read: "B", next: q_w6_0, write: "B", move: R}
+  - {state: q_back_7, read: "1", next: q_back_7, write: "1", move: L}
+  - {state: q_back_7, read: "B", next: q_w7_0, write: "B", move: R}
+  - {state: q_back_8, read: "1", next: q_back_8, write: "1", move: L}
+  - {state: q_back_8, read: "B", next: q_w8_0, write: "B", move: R}
+
+  - {state: q_w1_0, read: "1", next: q_clear, write: "1", move: R}
+  - {state: q_w2_0, read: "1", next: q_w2_1, write: "1", move: R}
+  - {state: q_w2_1, read: "1", next: q_clear, write: "0", move: R}
+  - {state: q_w3_0, read: "1", next: q_w3_1, write: "1", move: R}
+  - {state: q_w3_1, read: "1", next: q_clear, write: "1", move: R}
+  - {state: q_w4_0, read: "1", next: q_w4_1, write: "1", move: R}
+  - {state: q_w4_1, read: "1", next: q_w4_2, write: "0", move: R}
+  - {state: q_w4_2, read: "1", next: q_clear, write: "0", move: R}
+  - {state: q_w5_0, read: "1", next: q_w5_1, write: "1", move: R}
+  - {state: q_w5_1, read: "1", next: q_w5_2, write: "0", move: R}
+  - {state: q_w5_2, read: "1", next: q_clear, write: "1", move: R}
+  - {state: q_w6_0, read: "1", next: q_w6_1, write: "1", move: R}
+  - {state: q_w6_1, read: "1", next: q_w6_2, write: "1", move: R}
+  - {state: q_w6_2, read: "1", next: q_clear, write: "0", move: R}
+  - {state: q_w7_0, read: "1", next: q_w7_1, write: "1", move: R}
+  - {state: q_w7_1, read: "1", next: q_w7_2, write: "1", move: R}
+  - {state: q_w7_2, read: "1", next: q_clear, write: "1", move: R}
+  - {state: q_w8_0, read: "1", next: q_w8_1, write: "1", move: R}
+  - {state: q_w8_1, read: "1", next: q_w8_2, write: "0", move: R}
+  - {state: q_w8_2, read: "1", next: q_w8_3, write: "0", move: R}
+  - {state: q_w8_3, read: "1", next: q_clear, write: "0", move: R}
+
+  - {state: q_clear, read: "1", next: q_clear, write: "B", move: R}
+  - {state: q_clear, read: "B", next: q_accept, write: "B", move: R}

@@ -1,0 +1,57 @@
+name: "binary_compare"
+description: "Iki binary sayiyi # ayraciyla karsilastiran temsilci test makinesi. Kabul: ilk sayi ikinci sayidan buyuk."
+
+states: [q0, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15, q16, q17, q18, q19, q20, q21, q22, q23, q24, q25, q26, q27, q28, q29, q30, q31, q32, q33, q34, q35, q36, q_accept, q_reject]
+input_alphabet: ["0", "1", "#"]
+tape_alphabet: ["0", "1", "#", "B"]
+blank: "B"
+start_state: q0
+accept_states: [q_accept]
+reject_states: [q_reject]
+
+transitions:
+  - {state: q0, read: "1", next: q1, write: "1", move: R}
+  - {state: q1, read: "1", next: q2, write: "1", move: R}
+  - {state: q2, read: "0", next: q3, write: "0", move: R}
+  - {state: q3, read: "0", next: q4, write: "0", move: R}
+  - {state: q4, read: "#", next: q5, write: "#", move: R}
+  - {state: q5, read: "1", next: q6, write: "1", move: R}
+  - {state: q6, read: "0", next: q7, write: "0", move: R}
+  - {state: q7, read: "1", next: q8, write: "1", move: R}
+  - {state: q8, read: "1", next: q9, write: "1", move: R}
+  - {state: q9, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q2, read: "1", next: q13, write: "1", move: R}
+  - {state: q13, read: "#", next: q14, write: "#", move: R}
+  - {state: q14, read: "1", next: q15, write: "1", move: R}
+  - {state: q15, read: "1", next: q16, write: "1", move: R}
+  - {state: q16, read: "0", next: q17, write: "0", move: R}
+  - {state: q17, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q1, read: "0", next: q10, write: "0", move: R}
+  - {state: q10, read: "#", next: q11, write: "#", move: R}
+  - {state: q11, read: "1", next: q12, write: "1", move: R}
+  - {state: q12, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q10, read: "1", next: q20, write: "1", move: R}
+  - {state: q20, read: "1", next: q21, write: "1", move: R}
+  - {state: q21, read: "#", next: q22, write: "#", move: R}
+  - {state: q22, read: "1", next: q23, write: "1", move: R}
+  - {state: q23, read: "1", next: q24, write: "1", move: R}
+  - {state: q24, read: "0", next: q25, write: "0", move: R}
+  - {state: q25, read: "0", next: q26, write: "0", move: R}
+  - {state: q26, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q20, read: "#", next: q27, write: "#", move: R}
+  - {state: q27, read: "1", next: q28, write: "1", move: R}
+  - {state: q28, read: "0", next: q29, write: "0", move: R}
+  - {state: q29, read: "1", next: q30, write: "1", move: R}
+  - {state: q30, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q1, read: "#", next: q18, write: "#", move: R}
+  - {state: q18, read: "0", next: q19, write: "0", move: R}
+  - {state: q19, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q18, read: "1", next: q34, write: "1", move: R}
+  - {state: q34, read: "0", next: q35, write: "0", move: R}
+  - {state: q35, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q0, read: "0", next: q31, write: "0", move: R}
+  - {state: q31, read: "#", next: q32, write: "#", move: R}
+  - {state: q32, read: "1", next: q33, write: "1", move: R}
+  - {state: q33, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q32, read: "0", next: q36, write: "0", move: R}
+  - {state: q36, read: "B", next: q_reject, write: "B", move: R}
