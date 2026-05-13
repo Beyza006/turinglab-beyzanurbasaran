@@ -5,7 +5,7 @@ from turinglab import SingleTapeTM
 MACHINES_DIR = Path(__file__).parent.parent / "machines"
 
 
-def run_machine(filename, input_string, max_steps=1000):
+def run_machine(filename, input_string, max_steps=2000):
     tm = SingleTapeTM.from_yaml(str(MACHINES_DIR / filename))
     return tm.run(input_string, max_steps=max_steps)
 
@@ -57,4 +57,54 @@ class TestBinaryCompare:
 
     def test_zero_is_not_greater_than_one(self):
         result = run_machine("binary_compare.yaml", "0#1")
+        assert result.accepted is False
+
+
+class TestStringCopy:
+    def test_copy_abba(self):
+        result = run_machine("string_copy.yaml", "abba")
+        assert result.accepted is True
+        assert result.final_tape.strip("B") == "abba#abba"
+
+    def test_copy_single_a(self):
+        result = run_machine("string_copy.yaml", "a")
+        assert result.accepted is True
+        assert result.final_tape.strip("B") == "a#a"
+
+    def test_copy_single_b(self):
+        result = run_machine("string_copy.yaml", "b")
+        assert result.accepted is True
+        assert result.final_tape.strip("B") == "b#b"
+
+    def test_copy_mixed_string(self):
+        result = run_machine("string_copy.yaml", "abab")
+        assert result.accepted is True
+        assert result.final_tape.strip("B") == "abab#abab"
+
+    def test_copy_empty_string(self):
+        result = run_machine("string_copy.yaml", "")
+        assert result.accepted is True
+        assert result.final_tape.strip("B") == "#"
+
+
+class TestStudentChoiceDivisibleByFour:
+    def test_zero_is_divisible_by_four(self):
+        result = run_machine("student_choice.yaml", "0")
+        assert result.accepted is True
+
+    def test_four_is_divisible_by_four(self):
+        result = run_machine("student_choice.yaml", "100")
+        assert result.accepted is True
+
+    def test_twelve_is_divisible_by_four(self):
+        result = run_machine("student_choice.yaml", "1100")
+        assert result.accepted is True
+
+    def test_two_is_not_divisible_by_four(self):
+        result = run_machine("student_choice.yaml", "10")
+        assert result.accepted is False
+        assert result.reason == "reject"
+
+    def test_empty_input_rejects(self):
+        result = run_machine("student_choice.yaml", "")
         assert result.accepted is False

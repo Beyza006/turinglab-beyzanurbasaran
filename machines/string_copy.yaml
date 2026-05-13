@@ -1,0 +1,61 @@
+name: "string_copy"
+description: "a/b dizgisini kopyalar. Ornek: abba -> abba#abba"
+
+states:
+  - q_seek_end
+  - q_return_start
+  - q_find
+  - q_go_copy_a
+  - q_go_copy_b
+  - q_return_after_copy
+  - q_restore
+  - q_accept
+
+input_alphabet: ["a", "b"]
+tape_alphabet: ["a", "b", "B", "#", "A", "C"]
+blank: "B"
+start_state: q_seek_end
+accept_states: [q_accept]
+reject_states: []
+
+transitions:
+  - {state: q_seek_end, read: "a", next: q_seek_end, write: "a", move: R}
+  - {state: q_seek_end, read: "b", next: q_seek_end, write: "b", move: R}
+  - {state: q_seek_end, read: "B", next: q_return_start, write: "#", move: L}
+
+  - {state: q_return_start, read: "a", next: q_return_start, write: "a", move: L}
+  - {state: q_return_start, read: "b", next: q_return_start, write: "b", move: L}
+  - {state: q_return_start, read: "B", next: q_find, write: "B", move: R}
+
+  - {state: q_find, read: "A", next: q_find, write: "A", move: R}
+  - {state: q_find, read: "C", next: q_find, write: "C", move: R}
+  - {state: q_find, read: "a", next: q_go_copy_a, write: "A", move: R}
+  - {state: q_find, read: "b", next: q_go_copy_b, write: "C", move: R}
+  - {state: q_find, read: "#", next: q_restore, write: "#", move: L}
+
+  - {state: q_go_copy_a, read: "a", next: q_go_copy_a, write: "a", move: R}
+  - {state: q_go_copy_a, read: "b", next: q_go_copy_a, write: "b", move: R}
+  - {state: q_go_copy_a, read: "A", next: q_go_copy_a, write: "A", move: R}
+  - {state: q_go_copy_a, read: "C", next: q_go_copy_a, write: "C", move: R}
+  - {state: q_go_copy_a, read: "#", next: q_go_copy_a, write: "#", move: R}
+  - {state: q_go_copy_a, read: "B", next: q_return_after_copy, write: "a", move: L}
+
+  - {state: q_go_copy_b, read: "a", next: q_go_copy_b, write: "a", move: R}
+  - {state: q_go_copy_b, read: "b", next: q_go_copy_b, write: "b", move: R}
+  - {state: q_go_copy_b, read: "A", next: q_go_copy_b, write: "A", move: R}
+  - {state: q_go_copy_b, read: "C", next: q_go_copy_b, write: "C", move: R}
+  - {state: q_go_copy_b, read: "#", next: q_go_copy_b, write: "#", move: R}
+  - {state: q_go_copy_b, read: "B", next: q_return_after_copy, write: "b", move: L}
+
+  - {state: q_return_after_copy, read: "a", next: q_return_after_copy, write: "a", move: L}
+  - {state: q_return_after_copy, read: "b", next: q_return_after_copy, write: "b", move: L}
+  - {state: q_return_after_copy, read: "A", next: q_return_after_copy, write: "A", move: L}
+  - {state: q_return_after_copy, read: "C", next: q_return_after_copy, write: "C", move: L}
+  - {state: q_return_after_copy, read: "#", next: q_return_after_copy, write: "#", move: L}
+  - {state: q_return_after_copy, read: "B", next: q_find, write: "B", move: R}
+
+  - {state: q_restore, read: "A", next: q_restore, write: "a", move: L}
+  - {state: q_restore, read: "C", next: q_restore, write: "b", move: L}
+  - {state: q_restore, read: "a", next: q_restore, write: "a", move: L}
+  - {state: q_restore, read: "b", next: q_restore, write: "b", move: L}
+  - {state: q_restore, read: "B", next: q_accept, write: "B", move: R}

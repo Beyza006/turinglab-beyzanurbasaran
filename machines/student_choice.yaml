@@ -1,0 +1,49 @@
+name: "student_choice"
+description: "Binary girdinin 4'e bolunup bolunmedigini test eder. Kabul: 0 veya son iki bit 00."
+
+states:
+  - q_start
+  - q_last0
+  - q_last1
+  - q_pair00
+  - q_pair01
+  - q_pair10
+  - q_pair11
+  - q_accept
+  - q_reject
+
+input_alphabet: ["0", "1"]
+tape_alphabet: ["0", "1", "B"]
+blank: "B"
+start_state: q_start
+accept_states: [q_accept]
+reject_states: [q_reject]
+
+transitions:
+  - {state: q_start, read: "0", next: q_last0, write: "0", move: R}
+  - {state: q_start, read: "1", next: q_last1, write: "1", move: R}
+  - {state: q_start, read: "B", next: q_reject, write: "B", move: R}
+
+  - {state: q_last0, read: "0", next: q_pair00, write: "0", move: R}
+  - {state: q_last0, read: "1", next: q_pair01, write: "1", move: R}
+  - {state: q_last0, read: "B", next: q_accept, write: "B", move: R}
+
+  - {state: q_last1, read: "0", next: q_pair10, write: "0", move: R}
+  - {state: q_last1, read: "1", next: q_pair11, write: "1", move: R}
+  - {state: q_last1, read: "B", next: q_reject, write: "B", move: R}
+
+  - {state: q_pair00, read: "0", next: q_pair00, write: "0", move: R}
+  - {state: q_pair00, read: "1", next: q_pair01, write: "1", move: R}
+  - {state: q_pair00, read: "B", next: q_accept, write: "B", move: R}
+
+  - {state: q_pair01, read: "0", next: q_pair10, write: "0", move: R}
+  - {state: q_pair01, read: "1", next: q_pair11, write: "1", move: R}
+  - {state: q_pair01, read: "B", next: q_reject, write: "B", move: R}
+
+  - {state: q_pair10, read: "0", next: q_pair00, write: "0", move: R}
+  - {state: q_pair10, read: "1", next: q_pair01, write: "1", move: R}
+  - {state: q_pair10, read: "B", next: q_reject, write: "B", move: R}
+
+  - {state: q_pair11, read: "0", next: q_pair10, write: "0", move: R}
+  - {state: q_pair11, read: "1", next: q_pair11, write: "1", move: R}
+  - {state: q_pair11, read: "B", next: q_reject, write: "B", move: R}
