@@ -134,6 +134,32 @@ gereksiz sola hareketten kaçınmalıdır; aşırı sola gidişi `max_steps` lim
 
 ---
 
+
+## Bolum 2 Makineleri
+
+Bolum 2 kapsaminda dort makine `machines/` klasorune eklendi:
+
+- `unary_to_binary.yaml`: 0-16 arasi unary girdiyi binary ciktisina cevirir.
+- `binary_compare.yaml`: 0-15 arasi canonical binary sayi ciftlerinde `x#y` icin `x > y` ise kabul eder.
+- `string_copy.yaml`: `a`/`b` dizgisini `w#w` formatinda kopyalar.
+- `student_choice.yaml`: binary girdinin 4'e bolunup bolunmedigini test eder.
+
+Ornek calistirma:
+
+```python
+from turinglab import SingleTapeTM
+
+tm = SingleTapeTM.from_yaml("machines/string_copy.yaml")
+result = tm.run("abba", max_steps=2000)
+print(result.accepted, result.final_tape.strip("B"))
+```
+
+Bolum 2 testleri icin:
+
+```bash
+pytest tests/test_machines.py -v
+```
+
 ## Demo Video
 
 *(Bölüm 3'te eklenecek)*

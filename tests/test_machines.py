@@ -74,6 +74,22 @@ class TestBinaryCompare:
         result = run_machine("binary_compare.yaml", "0#1")
         assert result.accepted is False
 
+    def test_fifteen_is_greater_than_zero(self):
+        result = run_machine("binary_compare.yaml", "1111#0")
+        assert result.accepted is True
+
+    def test_eight_is_greater_than_seven(self):
+        result = run_machine("binary_compare.yaml", "1000#111")
+        assert result.accepted is True
+
+    def test_three_is_not_greater_than_nine(self):
+        result = run_machine("binary_compare.yaml", "11#1001")
+        assert result.accepted is False
+
+    def test_fourteen_is_not_greater_than_fifteen(self):
+        result = run_machine("binary_compare.yaml", "1110#1111")
+        assert result.accepted is False
+
 
 class TestStringCopy:
     def test_copy_abba(self):

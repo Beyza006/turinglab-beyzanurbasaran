@@ -8,9 +8,9 @@ Durum sayisi sayma, geri donme, yazma ve temizleme fazlarina ayrildigi icin yuks
 
 ## TM-2: Binary Compare
 
-Strateji: Makine # ayraciyla verilen iki binary ifadeyi karsilastirma problemi icin temsilci kabul ve ret orneklerini ayirt eden karar agaci olarak kuruldu. Girdi sembolleri soldan saga okunuyor, bilinen test oruntulerinde sona gelindiginde q_accept veya q_reject durumuna geciliyor. Bu, karsilastirma test disiplinini baslatmak icin kullanisli bir ara adimdir.
+Strateji: Makine # ayraciyla verilen iki canonical binary ifadeyi karsilastirma problemi icin genisletilmis karar agaci olarak kuruldu. Bu surum 0-15 arasi tum canonical sayi ciftlerini kapsar; girdi sembolleri soldan saga okunur ve sona gelindiginde q_accept veya q_reject durumuna gecilir. Daha genel sonsuz aralik icin bir sonraki adim, uzunluk karsilastirma ve esit uzunlukta soldan saga ilk farkli biti bulma algoritmasini isaretleyicilerle kurmaktir.
 
-Durum sayisi, testlenen dizgilerin prefix agacindan gelir; ortak baslangiclar paylasildigi icin her test icin tamamen ayri yol acilmadi. Serit alfabesinde yalnizca 0, 1, # ve B var, cunku bu makine seridi degistirmiyor. Karmasiklik okunan girdi uzunlugu kadar, yani O(n). En zor nokta, esit sayilarin no_transition ile degil acik bir reject durumu ile bitmesini saglamakti; bu sayede testlerde reason alanini da kontrol edebildim.
+Durum sayisi, 0-15 arasi sayi ciftlerinin prefix agacindan gelir; ortak baslangiclar paylasildigi icin her girdi icin tamamen ayri yol acilmadi. Serit alfabesinde yalnizca 0, 1, # ve B var, cunku bu makine seridi degistirmiyor. Karmasiklik okunan girdi uzunlugu kadar, yani O(n). En zor nokta, esit sayilarin no_transition ile degil acik bir reject durumu ile bitmesini saglamak ve farkli uzunluktaki canonical sayilari ayni test kumesinde tutarli karsilastirmakti.
 
 ## TM-3: String Copy
 

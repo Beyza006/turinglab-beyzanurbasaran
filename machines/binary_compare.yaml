@@ -1,7 +1,298 @@
 name: "binary_compare"
-description: "Iki binary sayiyi # ayraciyla karsilastiran temsilci test makinesi. Kabul: ilk sayi ikinci sayidan buyuk."
+description: "0-15 arasi canonical binary sayi ciftlerini # ayraciyla karsilastirir. Kabul: ilk sayi ikinci sayidan buyuk."
 
-states: [q0, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15, q16, q17, q18, q19, q20, q21, q22, q23, q24, q25, q26, q27, q28, q29, q30, q31, q32, q33, q34, q35, q36, q_accept, q_reject]
+states:
+  - q0
+  - q1
+  - q2
+  - q3
+  - q4
+  - q5
+  - q6
+  - q7
+  - q8
+  - q9
+  - q10
+  - q11
+  - q12
+  - q13
+  - q14
+  - q15
+  - q16
+  - q17
+  - q18
+  - q19
+  - q20
+  - q21
+  - q22
+  - q23
+  - q24
+  - q25
+  - q26
+  - q27
+  - q28
+  - q29
+  - q30
+  - q31
+  - q32
+  - q33
+  - q34
+  - q35
+  - q36
+  - q37
+  - q38
+  - q39
+  - q40
+  - q41
+  - q42
+  - q43
+  - q44
+  - q45
+  - q46
+  - q47
+  - q48
+  - q49
+  - q50
+  - q51
+  - q52
+  - q53
+  - q54
+  - q55
+  - q56
+  - q57
+  - q58
+  - q59
+  - q60
+  - q61
+  - q62
+  - q63
+  - q64
+  - q65
+  - q66
+  - q67
+  - q68
+  - q69
+  - q70
+  - q71
+  - q72
+  - q73
+  - q74
+  - q75
+  - q76
+  - q77
+  - q78
+  - q79
+  - q80
+  - q81
+  - q82
+  - q83
+  - q84
+  - q85
+  - q86
+  - q87
+  - q88
+  - q89
+  - q90
+  - q91
+  - q92
+  - q93
+  - q94
+  - q95
+  - q96
+  - q97
+  - q98
+  - q99
+  - q100
+  - q101
+  - q102
+  - q103
+  - q104
+  - q105
+  - q106
+  - q107
+  - q108
+  - q109
+  - q110
+  - q111
+  - q112
+  - q113
+  - q114
+  - q115
+  - q116
+  - q117
+  - q118
+  - q119
+  - q120
+  - q121
+  - q122
+  - q123
+  - q124
+  - q125
+  - q126
+  - q127
+  - q128
+  - q129
+  - q130
+  - q131
+  - q132
+  - q133
+  - q134
+  - q135
+  - q136
+  - q137
+  - q138
+  - q139
+  - q140
+  - q141
+  - q142
+  - q143
+  - q144
+  - q145
+  - q146
+  - q147
+  - q148
+  - q149
+  - q150
+  - q151
+  - q152
+  - q153
+  - q154
+  - q155
+  - q156
+  - q157
+  - q158
+  - q159
+  - q160
+  - q161
+  - q162
+  - q163
+  - q164
+  - q165
+  - q166
+  - q167
+  - q168
+  - q169
+  - q170
+  - q171
+  - q172
+  - q173
+  - q174
+  - q175
+  - q176
+  - q177
+  - q178
+  - q179
+  - q180
+  - q181
+  - q182
+  - q183
+  - q184
+  - q185
+  - q186
+  - q187
+  - q188
+  - q189
+  - q190
+  - q191
+  - q192
+  - q193
+  - q194
+  - q195
+  - q196
+  - q197
+  - q198
+  - q199
+  - q200
+  - q201
+  - q202
+  - q203
+  - q204
+  - q205
+  - q206
+  - q207
+  - q208
+  - q209
+  - q210
+  - q211
+  - q212
+  - q213
+  - q214
+  - q215
+  - q216
+  - q217
+  - q218
+  - q219
+  - q220
+  - q221
+  - q222
+  - q223
+  - q224
+  - q225
+  - q226
+  - q227
+  - q228
+  - q229
+  - q230
+  - q231
+  - q232
+  - q233
+  - q234
+  - q235
+  - q236
+  - q237
+  - q238
+  - q239
+  - q240
+  - q241
+  - q242
+  - q243
+  - q244
+  - q245
+  - q246
+  - q247
+  - q248
+  - q249
+  - q250
+  - q251
+  - q252
+  - q253
+  - q254
+  - q255
+  - q256
+  - q257
+  - q258
+  - q259
+  - q260
+  - q261
+  - q262
+  - q263
+  - q264
+  - q265
+  - q266
+  - q267
+  - q268
+  - q269
+  - q270
+  - q271
+  - q272
+  - q273
+  - q274
+  - q275
+  - q276
+  - q277
+  - q278
+  - q279
+  - q280
+  - q281
+  - q282
+  - q283
+  - q284
+  - q285
+  - q286
+  - q287
+  - q288
+  - q_accept
+  - q_reject
 input_alphabet: ["0", "1", "#"]
 tape_alphabet: ["0", "1", "#", "B"]
 blank: "B"
@@ -10,48 +301,547 @@ accept_states: [q_accept]
 reject_states: [q_reject]
 
 transitions:
-  - {state: q0, read: "1", next: q1, write: "1", move: R}
-  - {state: q1, read: "1", next: q2, write: "1", move: R}
+  - {state: q0, read: "0", next: q1, write: "0", move: R}
+  - {state: q1, read: "#", next: q2, write: "#", move: R}
   - {state: q2, read: "0", next: q3, write: "0", move: R}
-  - {state: q3, read: "0", next: q4, write: "0", move: R}
-  - {state: q4, read: "#", next: q5, write: "#", move: R}
-  - {state: q5, read: "1", next: q6, write: "1", move: R}
+  - {state: q3, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q2, read: "1", next: q4, write: "1", move: R}
+  - {state: q4, read: "0", next: q9, write: "0", move: R}
+  - {state: q9, read: "0", next: q21, write: "0", move: R}
+  - {state: q21, read: "0", next: q49, write: "0", move: R}
+  - {state: q49, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q21, read: "1", next: q50, write: "1", move: R}
+  - {state: q50, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q21, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q9, read: "1", next: q22, write: "1", move: R}
+  - {state: q22, read: "0", next: q51, write: "0", move: R}
+  - {state: q51, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q22, read: "1", next: q52, write: "1", move: R}
+  - {state: q52, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q22, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q9, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q4, read: "1", next: q10, write: "1", move: R}
+  - {state: q10, read: "0", next: q23, write: "0", move: R}
+  - {state: q23, read: "0", next: q53, write: "0", move: R}
+  - {state: q53, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q23, read: "1", next: q54, write: "1", move: R}
+  - {state: q54, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q23, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q10, read: "1", next: q24, write: "1", move: R}
+  - {state: q24, read: "0", next: q55, write: "0", move: R}
+  - {state: q55, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q24, read: "1", next: q56, write: "1", move: R}
+  - {state: q56, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q24, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q10, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q4, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q0, read: "1", next: q5, write: "1", move: R}
+  - {state: q5, read: "#", next: q6, write: "#", move: R}
   - {state: q6, read: "0", next: q7, write: "0", move: R}
-  - {state: q7, read: "1", next: q8, write: "1", move: R}
-  - {state: q8, read: "1", next: q9, write: "1", move: R}
-  - {state: q9, read: "B", next: q_accept, write: "B", move: R}
-  - {state: q2, read: "1", next: q13, write: "1", move: R}
-  - {state: q13, read: "#", next: q14, write: "#", move: R}
-  - {state: q14, read: "1", next: q15, write: "1", move: R}
-  - {state: q15, read: "1", next: q16, write: "1", move: R}
-  - {state: q16, read: "0", next: q17, write: "0", move: R}
-  - {state: q17, read: "B", next: q_accept, write: "B", move: R}
-  - {state: q1, read: "0", next: q10, write: "0", move: R}
-  - {state: q10, read: "#", next: q11, write: "#", move: R}
-  - {state: q11, read: "1", next: q12, write: "1", move: R}
-  - {state: q12, read: "B", next: q_accept, write: "B", move: R}
-  - {state: q10, read: "1", next: q20, write: "1", move: R}
-  - {state: q20, read: "1", next: q21, write: "1", move: R}
-  - {state: q21, read: "#", next: q22, write: "#", move: R}
-  - {state: q22, read: "1", next: q23, write: "1", move: R}
-  - {state: q23, read: "1", next: q24, write: "1", move: R}
-  - {state: q24, read: "0", next: q25, write: "0", move: R}
-  - {state: q25, read: "0", next: q26, write: "0", move: R}
+  - {state: q7, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q6, read: "1", next: q8, write: "1", move: R}
+  - {state: q8, read: "0", next: q11, write: "0", move: R}
+  - {state: q11, read: "0", next: q25, write: "0", move: R}
+  - {state: q25, read: "0", next: q57, write: "0", move: R}
+  - {state: q57, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q25, read: "1", next: q58, write: "1", move: R}
+  - {state: q58, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q25, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q11, read: "1", next: q26, write: "1", move: R}
+  - {state: q26, read: "0", next: q59, write: "0", move: R}
+  - {state: q59, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q26, read: "1", next: q60, write: "1", move: R}
+  - {state: q60, read: "B", next: q_reject, write: "B", move: R}
   - {state: q26, read: "B", next: q_reject, write: "B", move: R}
-  - {state: q20, read: "#", next: q27, write: "#", move: R}
-  - {state: q27, read: "1", next: q28, write: "1", move: R}
-  - {state: q28, read: "0", next: q29, write: "0", move: R}
-  - {state: q29, read: "1", next: q30, write: "1", move: R}
+  - {state: q11, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q8, read: "1", next: q12, write: "1", move: R}
+  - {state: q12, read: "0", next: q27, write: "0", move: R}
+  - {state: q27, read: "0", next: q61, write: "0", move: R}
+  - {state: q61, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q27, read: "1", next: q62, write: "1", move: R}
+  - {state: q62, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q27, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q12, read: "1", next: q28, write: "1", move: R}
+  - {state: q28, read: "0", next: q63, write: "0", move: R}
+  - {state: q63, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q28, read: "1", next: q64, write: "1", move: R}
+  - {state: q64, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q28, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q12, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q8, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q5, read: "0", next: q13, write: "0", move: R}
+  - {state: q13, read: "#", next: q14, write: "#", move: R}
+  - {state: q14, read: "0", next: q15, write: "0", move: R}
+  - {state: q15, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q14, read: "1", next: q16, write: "1", move: R}
+  - {state: q16, read: "0", next: q29, write: "0", move: R}
+  - {state: q29, read: "0", next: q65, write: "0", move: R}
+  - {state: q65, read: "0", next: q113, write: "0", move: R}
+  - {state: q113, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q65, read: "1", next: q114, write: "1", move: R}
+  - {state: q114, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q65, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q29, read: "1", next: q66, write: "1", move: R}
+  - {state: q66, read: "0", next: q115, write: "0", move: R}
+  - {state: q115, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q66, read: "1", next: q116, write: "1", move: R}
+  - {state: q116, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q66, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q29, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q16, read: "1", next: q30, write: "1", move: R}
+  - {state: q30, read: "0", next: q67, write: "0", move: R}
+  - {state: q67, read: "0", next: q117, write: "0", move: R}
+  - {state: q117, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q67, read: "1", next: q118, write: "1", move: R}
+  - {state: q118, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q67, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q30, read: "1", next: q68, write: "1", move: R}
+  - {state: q68, read: "0", next: q119, write: "0", move: R}
+  - {state: q119, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q68, read: "1", next: q120, write: "1", move: R}
+  - {state: q120, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q68, read: "B", next: q_reject, write: "B", move: R}
   - {state: q30, read: "B", next: q_reject, write: "B", move: R}
-  - {state: q1, read: "#", next: q18, write: "#", move: R}
+  - {state: q16, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q13, read: "0", next: q31, write: "0", move: R}
+  - {state: q31, read: "#", next: q32, write: "#", move: R}
+  - {state: q32, read: "0", next: q33, write: "0", move: R}
+  - {state: q33, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q32, read: "1", next: q34, write: "1", move: R}
+  - {state: q34, read: "0", next: q69, write: "0", move: R}
+  - {state: q69, read: "0", next: q121, write: "0", move: R}
+  - {state: q121, read: "0", next: q161, write: "0", move: R}
+  - {state: q161, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q121, read: "1", next: q162, write: "1", move: R}
+  - {state: q162, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q121, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q69, read: "1", next: q122, write: "1", move: R}
+  - {state: q122, read: "0", next: q163, write: "0", move: R}
+  - {state: q163, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q122, read: "1", next: q164, write: "1", move: R}
+  - {state: q164, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q122, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q69, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q34, read: "1", next: q70, write: "1", move: R}
+  - {state: q70, read: "0", next: q123, write: "0", move: R}
+  - {state: q123, read: "0", next: q165, write: "0", move: R}
+  - {state: q165, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q123, read: "1", next: q166, write: "1", move: R}
+  - {state: q166, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q123, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q70, read: "1", next: q124, write: "1", move: R}
+  - {state: q124, read: "0", next: q167, write: "0", move: R}
+  - {state: q167, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q124, read: "1", next: q168, write: "1", move: R}
+  - {state: q168, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q124, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q70, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q34, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q31, read: "0", next: q71, write: "0", move: R}
+  - {state: q71, read: "#", next: q72, write: "#", move: R}
+  - {state: q72, read: "0", next: q73, write: "0", move: R}
+  - {state: q73, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q72, read: "1", next: q74, write: "1", move: R}
+  - {state: q74, read: "0", next: q125, write: "0", move: R}
+  - {state: q125, read: "0", next: q169, write: "0", move: R}
+  - {state: q169, read: "0", next: q225, write: "0", move: R}
+  - {state: q225, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q169, read: "1", next: q226, write: "1", move: R}
+  - {state: q226, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q169, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q125, read: "1", next: q170, write: "1", move: R}
+  - {state: q170, read: "0", next: q227, write: "0", move: R}
+  - {state: q227, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q170, read: "1", next: q228, write: "1", move: R}
+  - {state: q228, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q170, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q125, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q74, read: "1", next: q126, write: "1", move: R}
+  - {state: q126, read: "0", next: q171, write: "0", move: R}
+  - {state: q171, read: "0", next: q229, write: "0", move: R}
+  - {state: q229, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q171, read: "1", next: q230, write: "1", move: R}
+  - {state: q230, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q171, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q126, read: "1", next: q172, write: "1", move: R}
+  - {state: q172, read: "0", next: q231, write: "0", move: R}
+  - {state: q231, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q172, read: "1", next: q232, write: "1", move: R}
+  - {state: q232, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q172, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q126, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q74, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q31, read: "1", next: q75, write: "1", move: R}
+  - {state: q75, read: "#", next: q76, write: "#", move: R}
+  - {state: q76, read: "0", next: q77, write: "0", move: R}
+  - {state: q77, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q76, read: "1", next: q78, write: "1", move: R}
+  - {state: q78, read: "0", next: q127, write: "0", move: R}
+  - {state: q127, read: "0", next: q173, write: "0", move: R}
+  - {state: q173, read: "0", next: q233, write: "0", move: R}
+  - {state: q233, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q173, read: "1", next: q234, write: "1", move: R}
+  - {state: q234, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q173, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q127, read: "1", next: q174, write: "1", move: R}
+  - {state: q174, read: "0", next: q235, write: "0", move: R}
+  - {state: q235, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q174, read: "1", next: q236, write: "1", move: R}
+  - {state: q236, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q174, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q127, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q78, read: "1", next: q128, write: "1", move: R}
+  - {state: q128, read: "0", next: q175, write: "0", move: R}
+  - {state: q175, read: "0", next: q237, write: "0", move: R}
+  - {state: q237, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q175, read: "1", next: q238, write: "1", move: R}
+  - {state: q238, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q175, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q128, read: "1", next: q176, write: "1", move: R}
+  - {state: q176, read: "0", next: q239, write: "0", move: R}
+  - {state: q239, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q176, read: "1", next: q240, write: "1", move: R}
+  - {state: q240, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q176, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q128, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q78, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q13, read: "1", next: q35, write: "1", move: R}
+  - {state: q35, read: "#", next: q36, write: "#", move: R}
+  - {state: q36, read: "0", next: q37, write: "0", move: R}
+  - {state: q37, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q36, read: "1", next: q38, write: "1", move: R}
+  - {state: q38, read: "0", next: q79, write: "0", move: R}
+  - {state: q79, read: "0", next: q129, write: "0", move: R}
+  - {state: q129, read: "0", next: q177, write: "0", move: R}
+  - {state: q177, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q129, read: "1", next: q178, write: "1", move: R}
+  - {state: q178, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q129, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q79, read: "1", next: q130, write: "1", move: R}
+  - {state: q130, read: "0", next: q179, write: "0", move: R}
+  - {state: q179, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q130, read: "1", next: q180, write: "1", move: R}
+  - {state: q180, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q130, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q79, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q38, read: "1", next: q80, write: "1", move: R}
+  - {state: q80, read: "0", next: q131, write: "0", move: R}
+  - {state: q131, read: "0", next: q181, write: "0", move: R}
+  - {state: q181, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q131, read: "1", next: q182, write: "1", move: R}
+  - {state: q182, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q131, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q80, read: "1", next: q132, write: "1", move: R}
+  - {state: q132, read: "0", next: q183, write: "0", move: R}
+  - {state: q183, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q132, read: "1", next: q184, write: "1", move: R}
+  - {state: q184, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q132, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q80, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q38, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q35, read: "0", next: q81, write: "0", move: R}
+  - {state: q81, read: "#", next: q82, write: "#", move: R}
+  - {state: q82, read: "0", next: q83, write: "0", move: R}
+  - {state: q83, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q82, read: "1", next: q84, write: "1", move: R}
+  - {state: q84, read: "0", next: q133, write: "0", move: R}
+  - {state: q133, read: "0", next: q185, write: "0", move: R}
+  - {state: q185, read: "0", next: q241, write: "0", move: R}
+  - {state: q241, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q185, read: "1", next: q242, write: "1", move: R}
+  - {state: q242, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q185, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q133, read: "1", next: q186, write: "1", move: R}
+  - {state: q186, read: "0", next: q243, write: "0", move: R}
+  - {state: q243, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q186, read: "1", next: q244, write: "1", move: R}
+  - {state: q244, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q186, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q133, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q84, read: "1", next: q134, write: "1", move: R}
+  - {state: q134, read: "0", next: q187, write: "0", move: R}
+  - {state: q187, read: "0", next: q245, write: "0", move: R}
+  - {state: q245, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q187, read: "1", next: q246, write: "1", move: R}
+  - {state: q246, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q187, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q134, read: "1", next: q188, write: "1", move: R}
+  - {state: q188, read: "0", next: q247, write: "0", move: R}
+  - {state: q247, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q188, read: "1", next: q248, write: "1", move: R}
+  - {state: q248, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q188, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q134, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q84, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q35, read: "1", next: q85, write: "1", move: R}
+  - {state: q85, read: "#", next: q86, write: "#", move: R}
+  - {state: q86, read: "0", next: q87, write: "0", move: R}
+  - {state: q87, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q86, read: "1", next: q88, write: "1", move: R}
+  - {state: q88, read: "0", next: q135, write: "0", move: R}
+  - {state: q135, read: "0", next: q189, write: "0", move: R}
+  - {state: q189, read: "0", next: q249, write: "0", move: R}
+  - {state: q249, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q189, read: "1", next: q250, write: "1", move: R}
+  - {state: q250, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q189, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q135, read: "1", next: q190, write: "1", move: R}
+  - {state: q190, read: "0", next: q251, write: "0", move: R}
+  - {state: q251, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q190, read: "1", next: q252, write: "1", move: R}
+  - {state: q252, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q190, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q135, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q88, read: "1", next: q136, write: "1", move: R}
+  - {state: q136, read: "0", next: q191, write: "0", move: R}
+  - {state: q191, read: "0", next: q253, write: "0", move: R}
+  - {state: q253, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q191, read: "1", next: q254, write: "1", move: R}
+  - {state: q254, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q191, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q136, read: "1", next: q192, write: "1", move: R}
+  - {state: q192, read: "0", next: q255, write: "0", move: R}
+  - {state: q255, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q192, read: "1", next: q256, write: "1", move: R}
+  - {state: q256, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q192, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q136, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q88, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q5, read: "1", next: q17, write: "1", move: R}
+  - {state: q17, read: "#", next: q18, write: "#", move: R}
   - {state: q18, read: "0", next: q19, write: "0", move: R}
   - {state: q19, read: "B", next: q_accept, write: "B", move: R}
-  - {state: q18, read: "1", next: q34, write: "1", move: R}
-  - {state: q34, read: "0", next: q35, write: "0", move: R}
-  - {state: q35, read: "B", next: q_reject, write: "B", move: R}
-  - {state: q0, read: "0", next: q31, write: "0", move: R}
-  - {state: q31, read: "#", next: q32, write: "#", move: R}
-  - {state: q32, read: "1", next: q33, write: "1", move: R}
-  - {state: q33, read: "B", next: q_reject, write: "B", move: R}
-  - {state: q32, read: "0", next: q36, write: "0", move: R}
-  - {state: q36, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q18, read: "1", next: q20, write: "1", move: R}
+  - {state: q20, read: "0", next: q39, write: "0", move: R}
+  - {state: q39, read: "0", next: q89, write: "0", move: R}
+  - {state: q89, read: "0", next: q137, write: "0", move: R}
+  - {state: q137, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q89, read: "1", next: q138, write: "1", move: R}
+  - {state: q138, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q89, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q39, read: "1", next: q90, write: "1", move: R}
+  - {state: q90, read: "0", next: q139, write: "0", move: R}
+  - {state: q139, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q90, read: "1", next: q140, write: "1", move: R}
+  - {state: q140, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q90, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q39, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q20, read: "1", next: q40, write: "1", move: R}
+  - {state: q40, read: "0", next: q91, write: "0", move: R}
+  - {state: q91, read: "0", next: q141, write: "0", move: R}
+  - {state: q141, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q91, read: "1", next: q142, write: "1", move: R}
+  - {state: q142, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q91, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q40, read: "1", next: q92, write: "1", move: R}
+  - {state: q92, read: "0", next: q143, write: "0", move: R}
+  - {state: q143, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q92, read: "1", next: q144, write: "1", move: R}
+  - {state: q144, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q92, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q40, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q20, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q17, read: "0", next: q41, write: "0", move: R}
+  - {state: q41, read: "#", next: q42, write: "#", move: R}
+  - {state: q42, read: "0", next: q43, write: "0", move: R}
+  - {state: q43, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q42, read: "1", next: q44, write: "1", move: R}
+  - {state: q44, read: "0", next: q93, write: "0", move: R}
+  - {state: q93, read: "0", next: q145, write: "0", move: R}
+  - {state: q145, read: "0", next: q193, write: "0", move: R}
+  - {state: q193, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q145, read: "1", next: q194, write: "1", move: R}
+  - {state: q194, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q145, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q93, read: "1", next: q146, write: "1", move: R}
+  - {state: q146, read: "0", next: q195, write: "0", move: R}
+  - {state: q195, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q146, read: "1", next: q196, write: "1", move: R}
+  - {state: q196, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q146, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q93, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q44, read: "1", next: q94, write: "1", move: R}
+  - {state: q94, read: "0", next: q147, write: "0", move: R}
+  - {state: q147, read: "0", next: q197, write: "0", move: R}
+  - {state: q197, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q147, read: "1", next: q198, write: "1", move: R}
+  - {state: q198, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q147, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q94, read: "1", next: q148, write: "1", move: R}
+  - {state: q148, read: "0", next: q199, write: "0", move: R}
+  - {state: q199, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q148, read: "1", next: q200, write: "1", move: R}
+  - {state: q200, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q148, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q94, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q44, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q41, read: "0", next: q95, write: "0", move: R}
+  - {state: q95, read: "#", next: q96, write: "#", move: R}
+  - {state: q96, read: "0", next: q97, write: "0", move: R}
+  - {state: q97, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q96, read: "1", next: q98, write: "1", move: R}
+  - {state: q98, read: "0", next: q149, write: "0", move: R}
+  - {state: q149, read: "0", next: q201, write: "0", move: R}
+  - {state: q201, read: "0", next: q257, write: "0", move: R}
+  - {state: q257, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q201, read: "1", next: q258, write: "1", move: R}
+  - {state: q258, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q201, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q149, read: "1", next: q202, write: "1", move: R}
+  - {state: q202, read: "0", next: q259, write: "0", move: R}
+  - {state: q259, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q202, read: "1", next: q260, write: "1", move: R}
+  - {state: q260, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q202, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q149, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q98, read: "1", next: q150, write: "1", move: R}
+  - {state: q150, read: "0", next: q203, write: "0", move: R}
+  - {state: q203, read: "0", next: q261, write: "0", move: R}
+  - {state: q261, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q203, read: "1", next: q262, write: "1", move: R}
+  - {state: q262, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q203, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q150, read: "1", next: q204, write: "1", move: R}
+  - {state: q204, read: "0", next: q263, write: "0", move: R}
+  - {state: q263, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q204, read: "1", next: q264, write: "1", move: R}
+  - {state: q264, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q204, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q150, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q98, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q41, read: "1", next: q99, write: "1", move: R}
+  - {state: q99, read: "#", next: q100, write: "#", move: R}
+  - {state: q100, read: "0", next: q101, write: "0", move: R}
+  - {state: q101, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q100, read: "1", next: q102, write: "1", move: R}
+  - {state: q102, read: "0", next: q151, write: "0", move: R}
+  - {state: q151, read: "0", next: q205, write: "0", move: R}
+  - {state: q205, read: "0", next: q265, write: "0", move: R}
+  - {state: q265, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q205, read: "1", next: q266, write: "1", move: R}
+  - {state: q266, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q205, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q151, read: "1", next: q206, write: "1", move: R}
+  - {state: q206, read: "0", next: q267, write: "0", move: R}
+  - {state: q267, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q206, read: "1", next: q268, write: "1", move: R}
+  - {state: q268, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q206, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q151, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q102, read: "1", next: q152, write: "1", move: R}
+  - {state: q152, read: "0", next: q207, write: "0", move: R}
+  - {state: q207, read: "0", next: q269, write: "0", move: R}
+  - {state: q269, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q207, read: "1", next: q270, write: "1", move: R}
+  - {state: q270, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q207, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q152, read: "1", next: q208, write: "1", move: R}
+  - {state: q208, read: "0", next: q271, write: "0", move: R}
+  - {state: q271, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q208, read: "1", next: q272, write: "1", move: R}
+  - {state: q272, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q208, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q152, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q102, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q17, read: "1", next: q45, write: "1", move: R}
+  - {state: q45, read: "#", next: q46, write: "#", move: R}
+  - {state: q46, read: "0", next: q47, write: "0", move: R}
+  - {state: q47, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q46, read: "1", next: q48, write: "1", move: R}
+  - {state: q48, read: "0", next: q103, write: "0", move: R}
+  - {state: q103, read: "0", next: q153, write: "0", move: R}
+  - {state: q153, read: "0", next: q209, write: "0", move: R}
+  - {state: q209, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q153, read: "1", next: q210, write: "1", move: R}
+  - {state: q210, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q153, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q103, read: "1", next: q154, write: "1", move: R}
+  - {state: q154, read: "0", next: q211, write: "0", move: R}
+  - {state: q211, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q154, read: "1", next: q212, write: "1", move: R}
+  - {state: q212, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q154, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q103, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q48, read: "1", next: q104, write: "1", move: R}
+  - {state: q104, read: "0", next: q155, write: "0", move: R}
+  - {state: q155, read: "0", next: q213, write: "0", move: R}
+  - {state: q213, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q155, read: "1", next: q214, write: "1", move: R}
+  - {state: q214, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q155, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q104, read: "1", next: q156, write: "1", move: R}
+  - {state: q156, read: "0", next: q215, write: "0", move: R}
+  - {state: q215, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q156, read: "1", next: q216, write: "1", move: R}
+  - {state: q216, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q156, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q104, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q48, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q45, read: "0", next: q105, write: "0", move: R}
+  - {state: q105, read: "#", next: q106, write: "#", move: R}
+  - {state: q106, read: "0", next: q107, write: "0", move: R}
+  - {state: q107, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q106, read: "1", next: q108, write: "1", move: R}
+  - {state: q108, read: "0", next: q157, write: "0", move: R}
+  - {state: q157, read: "0", next: q217, write: "0", move: R}
+  - {state: q217, read: "0", next: q273, write: "0", move: R}
+  - {state: q273, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q217, read: "1", next: q274, write: "1", move: R}
+  - {state: q274, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q217, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q157, read: "1", next: q218, write: "1", move: R}
+  - {state: q218, read: "0", next: q275, write: "0", move: R}
+  - {state: q275, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q218, read: "1", next: q276, write: "1", move: R}
+  - {state: q276, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q218, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q157, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q108, read: "1", next: q158, write: "1", move: R}
+  - {state: q158, read: "0", next: q219, write: "0", move: R}
+  - {state: q219, read: "0", next: q277, write: "0", move: R}
+  - {state: q277, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q219, read: "1", next: q278, write: "1", move: R}
+  - {state: q278, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q219, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q158, read: "1", next: q220, write: "1", move: R}
+  - {state: q220, read: "0", next: q279, write: "0", move: R}
+  - {state: q279, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q220, read: "1", next: q280, write: "1", move: R}
+  - {state: q280, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q220, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q158, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q108, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q45, read: "1", next: q109, write: "1", move: R}
+  - {state: q109, read: "#", next: q110, write: "#", move: R}
+  - {state: q110, read: "0", next: q111, write: "0", move: R}
+  - {state: q111, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q110, read: "1", next: q112, write: "1", move: R}
+  - {state: q112, read: "0", next: q159, write: "0", move: R}
+  - {state: q159, read: "0", next: q221, write: "0", move: R}
+  - {state: q221, read: "0", next: q281, write: "0", move: R}
+  - {state: q281, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q221, read: "1", next: q282, write: "1", move: R}
+  - {state: q282, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q221, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q159, read: "1", next: q222, write: "1", move: R}
+  - {state: q222, read: "0", next: q283, write: "0", move: R}
+  - {state: q283, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q222, read: "1", next: q284, write: "1", move: R}
+  - {state: q284, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q222, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q159, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q112, read: "1", next: q160, write: "1", move: R}
+  - {state: q160, read: "0", next: q223, write: "0", move: R}
+  - {state: q223, read: "0", next: q285, write: "0", move: R}
+  - {state: q285, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q223, read: "1", next: q286, write: "1", move: R}
+  - {state: q286, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q223, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q160, read: "1", next: q224, write: "1", move: R}
+  - {state: q224, read: "0", next: q287, write: "0", move: R}
+  - {state: q287, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q224, read: "1", next: q288, write: "1", move: R}
+  - {state: q288, read: "B", next: q_reject, write: "B", move: R}
+  - {state: q224, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q160, read: "B", next: q_accept, write: "B", move: R}
+  - {state: q112, read: "B", next: q_accept, write: "B", move: R}
