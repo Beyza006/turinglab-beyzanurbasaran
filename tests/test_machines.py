@@ -36,6 +36,21 @@ class TestUnaryToBinary:
         assert result.accepted is True
         assert result.final_tape.strip("B") == "1000"
 
+    def test_nine_unary_to_binary(self):
+        result = run_machine("unary_to_binary.yaml", "111111111")
+        assert result.accepted is True
+        assert result.final_tape.strip("B") == "1001"
+
+    def test_twelve_unary_to_binary(self):
+        result = run_machine("unary_to_binary.yaml", "111111111111")
+        assert result.accepted is True
+        assert result.final_tape.strip("B") == "1100"
+
+    def test_sixteen_unary_to_binary(self):
+        result = run_machine("unary_to_binary.yaml", "1111111111111111")
+        assert result.accepted is True
+        assert result.final_tape.strip("B") == "10000"
+
 
 class TestBinaryCompare:
     def test_first_binary_is_greater(self):

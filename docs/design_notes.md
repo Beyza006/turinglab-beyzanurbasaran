@@ -2,9 +2,9 @@
 
 ## TM-1: Unary to Binary
 
-Strateji: Bu makine unary girdiyi once uzunluk olarak sayar, sonra ayni seridin solundan binary karsiligini yazar ve kalan eski unary hucrelerini blank sembole cevirir. Bu ilk surumde 0-8 araligi kapsandi; boylece bolum 2 icin donusum fikri, yazma ve temizleme adimlari somut olarak test edilebilir hale geldi. Daha genel surumde X isaretleyiciyle tekrarli artirma yapan bir binary sayac kullanmak daha dogru olurdu.
+Strateji: Bu makine unary girdiyi once uzunluk olarak sayar, sonra ayni seridin solundan binary karsiligini yazar ve kalan eski unary hucrelerini blank sembole cevirir. Bu ikinci surumde 0-16 araligi kapsandi; boylece bolum 2 icin donusum fikri, yazma ve temizleme adimlari daha genis test kumesiyle dogrulanabilir hale geldi. Daha genel surumde X isaretleyiciyle tekrarli artirma yapan bir binary sayac kullanmak daha dogru olurdu.
 
-Durum sayisi sayma, geri donme, yazma ve temizleme fazlarina ayrildigi icin yuksek gorunuyor. Serit alfabesinde 0, 1, B ve ileride genisletme icin X bulunuyor. Karmasiklik desteklenen uzunluk icin dogrusal; genel sayacli tasarimda unary uzunlugu n ise her 1 icin binary sayaci artirilacagindan yaklasik O(n log n) veya uygulamaya gore O(n^2) hareket beklenir. En zor bug, sonuc yazildiktan sonra eski unary sembollerinin seritte kalmasiydi; bunu ayri bir q_clear faziyla cozdum.
+Durum sayisi sayma, geri donme, yazma ve temizleme fazlarina ayrildigi icin yuksek gorunuyor. Serit alfabesinde 0, 1, B ve ileride genisletme icin X bulunuyor. Karmasiklik desteklenen uzunluk icin dogrusal tarama + yazma seklindedir; genel sayacli tasarimda unary uzunlugu n ise her 1 icin binary sayaci artirilacagindan yaklasik O(n log n) veya uygulamaya gore O(n^2) hareket beklenir. En zor bug, sonuc yazildiktan sonra eski unary sembollerinin seritte kalmasiydi; bunu ayri bir q_clear faziyla cozdum.
 
 ## TM-2: Binary Compare
 
