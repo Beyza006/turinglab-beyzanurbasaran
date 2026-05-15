@@ -23,3 +23,7 @@ Bu tasarim 8 ana durum kullaniyor: sona gitme, basa donme, kaynak sembol bulma, 
 Strateji: Secim makinesi binary girdinin 4'e bolunup bolunmedigini test eder. Binary sayilarda 0 sayisi veya son iki biti 00 olan sayilar 4'e bolunur. Bu nedenle makine tum girdiyi soldan saga okur ve sadece son bir/iki bit bilgisini durumlarda saklar.
 
 Durum sayisi azdir; q_last0/q_last1 tek sembollu girdileri, q_pair00/q_pair01/q_pair10/q_pair11 ise son iki biti temsil eder. Ek serit sembolune gerek yoktur, cunku bu bir karar problemi ve seridi degistirmeden cozulebilir. Karmasiklik O(n), bellek ise durumlar uzerinden sabittir. En zorlandigim kisim tek sembollu 0 girdisini kabul ederken bos girdiyi reddetmekti; q_start uzerinden B okundugunda q_reject'e giderek bu kenar durumu ayrildi.
+
+## 15 Mayis Test Kapsami Guncellemesi
+
+Bugunku calismada test dosyasi sadece tekil ornekleri kontrol eden bir dosya olmaktan cikarildi. `unary_to_binary` icin desteklenen 0-16 araliginin tamami, `binary_compare` icin 0-15 arasi tum canonical sayi ciftleri parametrik testlerle kontrol ediliyor. `string_copy` tarafinda daha uzun a/b dizgileri ve bilinmeyen sembol durumlari eklendi. `student_choice` icin de 4'e bolunen, bolunmeyen, bos ve leading-zero iceren girdiler ayrildi. Bu sayede testler hem kabul hem ret hem de no_transition davranislarini daha acik gosteriyor.

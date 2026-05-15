@@ -160,6 +160,8 @@ Bolum 2 testleri icin:
 pytest tests/test_machines.py -v
 ```
 
+Ilerleme ve test kapsami notu: `docs/week2_progress.md`
+
 ## Demo Video
 
 *(Bölüm 3'te eklenecek)*
