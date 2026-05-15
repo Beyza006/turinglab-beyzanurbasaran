@@ -1,5 +1,7 @@
 from pathlib import Path
 
+import pytest
+
 from turinglab import SingleTapeTM
 
 MACHINES_DIR = Path(__file__).parent.parent / "machines"
@@ -139,3 +141,51 @@ class TestStudentChoiceDivisibleByFour:
     def test_empty_input_rejects(self):
         result = run_machine("student_choice.yaml", "")
         assert result.accepted is False
+
+
+class TestExpandedMachineCoverage:
+    @pytest.mark.parametrize("count", range(17))
+    def test_unary_to_binary_all_supported_counts(self, count):
+        result = run_machine("unary_to_binary.yaml", "1" * count)
+        assert result.accepted is True
+        assert result.final_tape.strip("B") == bin(count)[2:]
+
+    @pytest.mark.parametrize("left", range(16))
+    @pytest.mark.parametrize("right", range(16))
+    def test_binary_compare_all_supported_pairs(self, left, right):
+        left_bits = bin(left)[2:]
+        right_bits = bin(right)[2:]
+        result = run_machine("binary_compare.yaml", f"{left_bits}#{right_bits}")
+        assert result.accepted is (left > right)
+        if left <= right:
+            assert result.reason == "reject"
+
+    @pytest.mark.parametrize(
+        ("input_string", "expected"),
+        [
+            ("aaaa", "aaaa#aaaa"),
+            ("bbbb", "bbbb#bbbb"),
+            ("baab", "baab#baab"),
+            ("ababba", "ababba#ababba"),
+        ],
+    )
+    def test_string_copy_additional_patterns(self, input_string, expected):
+        result = run_machine("string_copy.yaml", input_string)
+        assert result.accepted is True
+        assert result.final_tape.strip("B") == expected
+
+    def test_string_copy_unknown_symbol_stops_with_no_transition(self):
+        result = run_machine("string_copy.yaml", "abc")
+        assert result.accepted is False
+        assert result.reason == "no_transition"
+
+    @pytest.mark.parametrize("input_string", ["10100", "100000", "00100"])
+    def test_student_choice_more_divisible_inputs(self, input_string):
+        result = run_machine("student_choice.yaml", input_string)
+        assert result.accepted is True
+
+    @pytest.mark.parametrize("input_string", ["1", "111", "10101"])
+    def test_student_choice_more_non_divisible_inputs(self, input_string):
+        result = run_machine("student_choice.yaml", input_string)
+        assert result.accepted is False
+        assert result.reason == "reject"
