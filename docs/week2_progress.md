@@ -1,41 +1,41 @@
-# Bolum 2 Ilerleme Notu
+# B?l?m 2 ?lerleme Notu
 
-Bu not, Bolum 2 kapsaminda tasarlanan makinelerin hangi noktada oldugunu ve testlerle nasil dogrulandigini ozetler.
+Bu not, B?l?m 2 kapsam?nda tasarlanan makinelerin hangi noktada oldu?unu ve testlerle nas?l do?ruland???n? ?zetler.
 
-## Commit Akisi
+## Commit Ak???
 
-- 13 Mayis: `unary_to_binary` ve `binary_compare` icin ilk YAML taslaklari eklendi.
-- 13 Mayis: `string_copy` ve `student_choice` makineleri eklendi, `design_notes.md` baslatildi.
-- 14 Mayis: `unary_to_binary` kapsami 0-16 araligina genisletildi.
-- 14 Mayis: `binary_compare` 0-15 arasi canonical binary sayi ciftlerini kapsayacak sekilde guclendirildi.
-- 15 Mayis: Makine test kapsami genisletildi; desteklenen araliklar ve edge-case davranislari otomatik test edildi.
+- 13 May?s: `unary_to_binary` ve `binary_compare` i?in ilk YAML taslaklar? eklendi.
+- 13 May?s: `string_copy` ve `student_choice` makineleri eklendi, `design_notes.md` ba?lat?ld?.
+- 14 May?s: `unary_to_binary` kapsam? 0-16 aral???na geni?letildi.
+- 14 May?s: `binary_compare` 0-15 aras? canonical binary say? ?iftlerini kapsayacak ?ekilde g??lendirildi.
+- 15 May?s: Makine test kapsam? geni?letildi; desteklenen aral?klar ve edge-case davran??lar? otomatik test edildi.
+- 16 May?s: README ve dok?mantasyon T?rk?e karakterler ve kullan?m ?rnekleri a??s?ndan d?zenlendi.
 
 ## Makine Durum Tablosu
 
 | Makine | Dosya | Mevcut kapsam | Test durumu |
 | --- | --- | --- | --- |
-| Unary to Binary | `machines/unary_to_binary.yaml` | 0-16 unary uzunlugu | 17 desteklenen girdi otomatik test ediliyor |
-| Binary Compare | `machines/binary_compare.yaml` | 0-15 arasi canonical `x#y` ciftleri | 16x16 = 256 cift otomatik test ediliyor |
-| String Copy | `machines/string_copy.yaml` | `a`/`b` alfabeli dizgiler | Bos girdi, tek karakter, karisik dizgiler ve bilinmeyen sembol testi var |
-| Student Choice | `machines/student_choice.yaml` | Binary 4'e bolunebilirlik | Kabul, ret, bos girdi ve leading-zero testleri var |
+| Unary to Binary | `machines/unary_to_binary.yaml` | 0-16 unary uzunlu?u | 17 desteklenen girdi otomatik test ediliyor |
+| Binary Compare | `machines/binary_compare.yaml` | 0-15 aras? canonical `x#y` ?iftleri | 16x16 = 256 ?ift otomatik test ediliyor |
+| String Copy | `machines/string_copy.yaml` | `a`/`b` alfabeli dizgiler | Bo? girdi, tek karakter, kar???k dizgiler ve bilinmeyen sembol testi var |
+| Student Choice | `machines/student_choice.yaml` | Binary 4'e b?l?nebilirlik | Kabul, ret, bo? girdi ve leading-zero testleri var |
 
-## Dogrulama Komutu
+## Do?rulama Komutu
 
-Tum motor ve makine testleri su komutla calistirilir:
+T?m motor ve makine testleri ?u komutla ?al??t?r?l?r:
 
 ```bash
 pytest tests -q
 ```
 
-15 Mayis itibariyla beklenen sonuc:
+15 May?s itibar?yla beklenen sonu?:
 
 ```text
 344 passed
 ```
 
-## Kalan Iyilestirme Fikirleri
+## Kalan ?yile?tirme Fikirleri
 
-- `unary_to_binary` icin finite araliktan genel binary sayac algoritmasina gecmek.
-- `binary_compare` icin finite karar agaci yerine isaretleyicili genel uzunluk/bit karsilastirma algoritmasi kurmak.
-- `design_notes.md` icindeki hata ayiklama hikayelerini daha dogal ve kisisel hale getirmek.
-- Bolum 3'e gecmeden once README'deki ornekleri terminal ciktilariyla desteklemek.
+- `unary_to_binary` i?in finite aral?ktan genel binary saya? algoritmas?na ge?mek.
+- `binary_compare` i?in finite karar a?ac? yerine i?aretleyicili genel uzunluk/bit kar??la?t?rma algoritmas? kurmak.
+- B?l?m 3'e ge?meden ?nce demo videosu ve mini-rapor i?in senaryo haz?rlamak.

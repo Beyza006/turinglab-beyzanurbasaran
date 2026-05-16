@@ -1,173 +1,172 @@
 # TuringLab
 
-**Hesaplama Kuramı Final Ödevi**  
-Selçuk Üniversitesi · Bilgisayar Mühendisliği  
-Hazırlayan: Beyzanur Başaran  
-Değerlendirme: Ahmet Erharman
+**Hesaplama Kuram? Final ?devi**  
+Sel?uk ?niversitesi ? Bilgisayar M?hendisli?i  
+Haz?rlayan: Beyzanur Ba?aran  
+De?erlendirme: Ahmet Erharman
 
 ---
 
-## Proje Hakkında
+## Proje Hakk?nda
 
-TuringLab, YAML formatında tanımlanmış deterministik tek-şeritli Turing makinelerini
-yükleyip çalıştıran bir Python kütüphanesidir. Proje üç zorunlu bölümden oluşur:
+TuringLab, YAML format?nda tan?mlanm?? deterministik tek ?eritli Turing makinelerini y?kleyip ?al??t?ran bir Python k?t?phanesidir. Proje ?? zorunlu b?l?mden olu?ur:
 
-| Bölüm | Konu | Puan |
-|-------|------|------|
-| Bölüm 1 | TM Motoru (`tm_engine.py`) | 50 |
-| Bölüm 2 | 4 TM Tasarımı | 35 |
-| Bölüm 3 | Demo Video + Mini-Rapor | 15 |
+| B?l?m | Konu | Puan |
+| --- | --- | --- |
+| B?l?m 1 | TM Motoru (`tm_engine.py`) | 50 |
+| B?l?m 2 | 4 TM Tasar?m? | 35 |
+| B?l?m 3 | Demo Video + Mini-Rapor | 15 |
 
 ---
 
 ## Kurulum
 
 ```bash
-# Repo'yu klonla
-git clone https://github.com/KULLANICI_ADI/turinglab-ADSOYADINIZ.git
-cd turinglab-ADSOYADINIZ
-
-# Bağımlılıkları yükle
+git clone https://github.com/Beyza006/turinglab-beyzanurbasaran.git
+cd turinglab-beyzanurbasaran
 pip install -r requirements.txt
 ```
 
 ---
 
-## Kullanım
-
-```python
-from turinglab import SingleTapeTM, RunResult
-
-# Makineyi YAML'dan yükle
-tm = SingleTapeTM.from_yaml("machines/binary_increment.yaml")
-
-# Çalıştır
-result: RunResult = tm.run(
-    input_string="1011",
-    max_steps=1000,
-    verbose=False
-)
-
-# Sonucu incele
-print(result.accepted)       # True
-print(result.final_tape.strip("B"))  # "1100"
-print(result.steps)          # kaç adım sürdü
-print(len(result.history))   # steps + 1 konfigürasyon
-
-# Tek bir adımı incele
-config = result.history[5]
-print(config.state, config.tape, config.head_position)
-```
-
-### Verbose Mod
-
-```python
-result = tm.run("1011", verbose=True)
-```
-
-Örnek çıktı:
-
-```
-Adım   0 | Durum: q0           | Şerit: [1]011B | Hareket: —
-Adım   1 | Durum: q0           | Şerit: 1[0]11B | Hareket: R
-Adım   2 | Durum: q0           | Şerit: 10[1]1B | Hareket: R
-...
-```
-
----
-
-## Testleri Çalıştırma
-
-```bash
-pytest tests/ -v
-```
-
----
-
-## Repo Yapısı
-
-```
-turinglab/
-├── README.md
-├── REPORT.md              # (Bölüm 3 — eklenecek)
-├── requirements.txt
-├── .gitignore
-├── turinglab/
-│   ├── __init__.py
-│   ├── tm_engine.py       # Bölüm 1: TM motoru
-│   ├── multi_tape.py      # (Bonus A — opsiyonel)
-│   ├── ntm.py             # (Bonus B — opsiyonel)
-│   └── visualizer.py      # (Bonus D — opsiyonel)
-├── machines/
-│   ├── binary_increment.yaml
-│   ├── unary_increment.yaml
-│   ├── even_a.yaml
-│   ├── unary_to_binary.yaml    # (Bölüm 2 — eklenecek)
-│   ├── binary_compare.yaml     # (Bölüm 2 — eklenecek)
-│   ├── string_copy.yaml        # (Bölüm 2 — eklenecek)
-│   └── student_choice.yaml     # (Bölüm 2 — eklenecek)
-├── tests/
-│   ├── test_tm_engine.py
-│   └── test_machines.py        # (Bölüm 2 — eklenecek)
-└── docs/
-    ├── design_notes.md         # (Bölüm 2 — eklenecek)
-    └── images/
-```
-
----
-
-## Tasarım Kararları
-
-### Şerit Temsili
-
-Şerit `dict[int, str]` (sparse dictionary) olarak tutulur.
-Bu yaklaşımın avantajları:
-- Sonsuz genişleyebilir (pozitif ve negatif indisler)
-- Yazılmamış hücreler otomatik olarak blank döner
-- Python string'lerinin immutability sorununu tamamen çözer
-
-### Sola Taşma (head_position < 0)
-
-Motor `dict[int, str]` (sparse) kullandığından kafa negatif indislere gidebilir — şerit
-sola da sonsuz genişleyebilir. Bu, teorik TM tanımıyla tam uyumludur. Makine tasarımları
-gereksiz sola hareketten kaçınmalıdır; aşırı sola gidişi `max_steps` limiti önler.
-
----
-
-
-## Bolum 2 Makineleri
-
-Bolum 2 kapsaminda dort makine `machines/` klasorune eklendi:
-
-- `unary_to_binary.yaml`: 0-16 arasi unary girdiyi binary ciktisina cevirir.
-- `binary_compare.yaml`: 0-15 arasi canonical binary sayi ciftlerinde `x#y` icin `x > y` ise kabul eder.
-- `string_copy.yaml`: `a`/`b` dizgisini `w#w` formatinda kopyalar.
-- `student_choice.yaml`: binary girdinin 4'e bolunup bolunmedigini test eder.
-
-Ornek calistirma:
+## Temel Kullan?m
 
 ```python
 from turinglab import SingleTapeTM
 
-tm = SingleTapeTM.from_yaml("machines/string_copy.yaml")
-result = tm.run("abba", max_steps=2000)
-print(result.accepted, result.final_tape.strip("B"))
+makine = SingleTapeTM.from_yaml("machines/binary_increment.yaml")
+sonuc = makine.run(input_string="1011", max_steps=1000, verbose=False)
+
+print(sonuc.accepted)              # True
+print(sonuc.final_tape.strip("B")) # 1100
+print(sonuc.steps)                 # ad?m say?s?
 ```
 
-Bolum 2 testleri icin:
+Verbose modda her ad?m ?erit ve kafa konumuyla birlikte yazd?r?l?r:
+
+```python
+makine = SingleTapeTM.from_yaml("machines/binary_increment.yaml")
+sonuc = makine.run("1011", max_steps=1000, verbose=True)
+```
+
+---
+
+## B?l?m 2 Makineleri
+
+B?l?m 2 kapsam?nda d?rt Turing makinesi `machines/` klas?r?ne eklendi:
+
+| Makine | Dosya | Davran?? |
+| --- | --- | --- |
+| Unary to Binary | `machines/unary_to_binary.yaml` | 0-16 aras? unary girdiyi binary ??kt?ya ?evirir. |
+| Binary Compare | `machines/binary_compare.yaml` | 0-15 aras? canonical binary `x#y` ?iftlerinde `x > y` ise kabul eder. |
+| String Copy | `machines/string_copy.yaml` | `a`/`b` dizgisini `w#w` format?nda kopyalar. |
+| Student Choice | `machines/student_choice.yaml` | Binary girdinin 4'e b?l?n?p b?l?nmedi?ini test eder. |
+
+### ?rnek 1: String Copy
+
+```python
+from turinglab import SingleTapeTM
+
+makine = SingleTapeTM.from_yaml("machines/string_copy.yaml")
+sonuc = makine.run("abba", max_steps=2000)
+
+print(sonuc.accepted)              # True
+print(sonuc.final_tape.strip("B")) # abba#abba
+```
+
+### ?rnek 2: Binary Compare
+
+```python
+from turinglab import SingleTapeTM
+
+makine = SingleTapeTM.from_yaml("machines/binary_compare.yaml")
+sonuc = makine.run("1100#1011", max_steps=2000)
+
+print(sonuc.accepted) # True, ??nk? 12 > 11
+```
+
+### ?rnek 3: 4'e B?l?nebilirlik
+
+```python
+from turinglab import SingleTapeTM
+
+makine = SingleTapeTM.from_yaml("machines/student_choice.yaml")
+sonuc = makine.run("10100", max_steps=2000)
+
+print(sonuc.accepted) # True, ??nk? 20 say?s? 4'e b?l?n?r
+```
+
+---
+
+## Testleri ?al??t?rma
+
+T?m testler:
 
 ```bash
-pytest tests/test_machines.py -v
+pytest tests -q
 ```
 
-Ilerleme ve test kapsami notu: `docs/week2_progress.md`
+Sadece B?l?m 2 testleri:
+
+```bash
+pytest tests/test_machines.py -q
+```
+
+15 May?s itibar?yla test sonucu:
+
+```text
+344 passed
+```
+
+---
+
+## Repo Yap?s?
+
+```text
+turinglab/
+??? README.md
+??? REPORT.md                  # B?l?m 3'te eklenecek
+??? requirements.txt
+??? .gitignore
+??? turinglab/
+?   ??? __init__.py
+?   ??? tm_engine.py            # B?l?m 1: TM motoru
+??? machines/
+?   ??? binary_increment.yaml
+?   ??? unary_increment.yaml
+?   ??? even_a.yaml
+?   ??? unary_to_binary.yaml
+?   ??? binary_compare.yaml
+?   ??? string_copy.yaml
+?   ??? student_choice.yaml
+??? tests/
+?   ??? test_tm_engine.py
+?   ??? test_machines.py
+??? docs/
+    ??? design_notes.md
+    ??? week2_progress.md
+```
+
+---
+
+## Tasar?m Kararlar?
+
+### ?erit Temsili
+
+?erit `dict[int, str]` yani sparse dictionary olarak tutulur. Bu yakla??m yaz?lmam?? h?creleri otomatik olarak blank sembol kabul eder ve ?eridin iki y?nde de geni?lemesine izin verir.
+
+### Sola Ta?ma
+
+Motor negatif indisleri destekler. Bu nedenle kafa sola hareket etti?inde Python listesindeki `-1` gibi yanl?? bir indeksleme problemi olu?maz. A??r? uzun veya hatal? ?al??an makineler i?in `max_steps` s?n?r? kullan?l?r.
+
+---
 
 ## Demo Video
 
-*(Bölüm 3'te eklenecek)*
+B?l?m 3'te eklenecek.
 
 ---
 
 ## Lisans
 
-Akademik ödev — yalnızca eğitim amaçlıdır.
+Akademik ?dev; yaln?zca e?itim ama?l?d?r.

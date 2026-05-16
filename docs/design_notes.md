@@ -1,29 +1,29 @@
-# Bolum 2 Tasarim Notlari
+# B?l?m 2 Tasar?m Notlar?
 
 ## TM-1: Unary to Binary
 
-Strateji: Bu makine unary girdiyi once uzunluk olarak sayar, sonra ayni seridin solundan binary karsiligini yazar ve kalan eski unary hucrelerini blank sembole cevirir. Bu ikinci surumde 0-16 araligi kapsandi; boylece bolum 2 icin donusum fikri, yazma ve temizleme adimlari daha genis test kumesiyle dogrulanabilir hale geldi. Daha genel surumde X isaretleyiciyle tekrarli artirma yapan bir binary sayac kullanmak daha dogru olurdu.
+Strateji: Bu makine unary girdiyi ?nce uzunluk olarak sayar, sonra ayn? ?eridin solundan binary kar??l???n? yazar ve kalan eski unary h?crelerini blank sembole ?evirir. Bu s?r?mde 0-16 aral??? kapsand?; b?ylece d?n???m fikri, yazma ad?m? ve temizleme faz? geni? bir test k?mesiyle do?rulanabilir hale geldi. Daha genel s?r?mde `X` i?aretleyiciyle tekrar tekrar binary saya? art?rmak daha do?ru bir yakla??m olurdu.
 
-Durum sayisi sayma, geri donme, yazma ve temizleme fazlarina ayrildigi icin yuksek gorunuyor. Serit alfabesinde 0, 1, B ve ileride genisletme icin X bulunuyor. Karmasiklik desteklenen uzunluk icin dogrusal tarama + yazma seklindedir; genel sayacli tasarimda unary uzunlugu n ise her 1 icin binary sayaci artirilacagindan yaklasik O(n log n) veya uygulamaya gore O(n^2) hareket beklenir. En zor bug, sonuc yazildiktan sonra eski unary sembollerinin seritte kalmasiydi; bunu ayri bir q_clear faziyla cozdum.
+Durum say?s?; sayma, ba?a d?nme, binary sonucu yazma ve eski sembolleri temizleme fazlar?na ayr?ld??? i?in y?ksektir. ?erit alfabesinde `0`, `1`, `B` ve ileride genelle?tirme i?in `X` bulunur. Desteklenen aral?kta ?al??ma do?rusal tarama ve yazma ad?mlar?ndan olu?ur. En zor hata, sonu? yaz?ld?ktan sonra eski unary sembollerinin ?eritte kalmas?yd?; bunu ayr? bir `q_clear` faz?yla ??zd?m.
 
 ## TM-2: Binary Compare
 
-Strateji: Makine # ayraciyla verilen iki canonical binary ifadeyi karsilastirma problemi icin genisletilmis karar agaci olarak kuruldu. Bu surum 0-15 arasi tum canonical sayi ciftlerini kapsar; girdi sembolleri soldan saga okunur ve sona gelindiginde q_accept veya q_reject durumuna gecilir. Daha genel sonsuz aralik icin bir sonraki adim, uzunluk karsilastirma ve esit uzunlukta soldan saga ilk farkli biti bulma algoritmasini isaretleyicilerle kurmaktir.
+Strateji: Makine `#` ayrac?yla verilen iki canonical binary ifadeyi kar??la?t?rmak i?in geni?letilmi? bir karar a?ac? olarak kuruldu. Bu s?r?m 0-15 aras? t?m canonical say? ?iftlerini kapsar. Girdi soldan sa?a okunur; sona gelindi?inde birinci say? ikinci say?dan b?y?kse `q_accept`, de?ilse `q_reject` durumuna ge?ilir.
 
-Durum sayisi, 0-15 arasi sayi ciftlerinin prefix agacindan gelir; ortak baslangiclar paylasildigi icin her girdi icin tamamen ayri yol acilmadi. Serit alfabesinde yalnizca 0, 1, # ve B var, cunku bu makine seridi degistirmiyor. Karmasiklik okunan girdi uzunlugu kadar, yani O(n). En zor nokta, esit sayilarin no_transition ile degil acik bir reject durumu ile bitmesini saglamak ve farkli uzunluktaki canonical sayilari ayni test kumesinde tutarli karsilastirmakti.
+Durum say?s?, 0-15 aras? say? ?iftlerinin prefix a?ac?ndan gelir. Ortak ba?lang??lar payla??ld??? i?in her girdi i?in tamamen ayr? yol a??lmad?. ?erit alfabesinde yaln?zca `0`, `1`, `#` ve `B` vard?r; ??nk? bu makine ?eridi de?i?tirmez, sadece karar verir. En ?nemli hata ay?klama noktas?, e?it say?lar?n `no_transition` ile de?il a??k bir reject durumuyla bitmesini sa?lamakt?.
 
 ## TM-3: String Copy
 
-Strateji: Makine once girdinin sonuna # koyar. Sonra soldan saga ilk isaretlenmemis a veya b sembolunu bulur, a icin A, b icin C isaretleyicisini yazar, seridin sonuna gidip ayni sembolu kopyalar ve tekrar basa doner. # sembolune gelindiginde tum kaynak semboller isaretlenmistir; son fazda A tekrar a, C tekrar b yapilir.
+Strateji: Makine ?nce girdinin sonuna `#` koyar. Sonra soldan sa?a ilk i?aretlenmemi? `a` veya `b` sembol?n? bulur. `a` i?in `A`, `b` i?in `C` i?aretleyicisini yazar, ?eridin sonuna gidip ayn? sembol? kopyalar ve tekrar ba?a d?ner. `#` sembol?ne gelindi?inde t?m kaynak semboller i?aretlenmi?tir; son fazda `A` tekrar `a`, `C` tekrar `b` yap?l?r.
 
-Bu tasarim 8 ana durum kullaniyor: sona gitme, basa donme, kaynak sembol bulma, a kopyalama, b kopyalama, kopyadan sonra geri donme, restore etme ve kabul. A/C isaretleyicileri kopyalanmis semboller ile henuz islenmemis kaynak sembolleri ayirmak icin gerekliydi. Her karakter icin seridin birkac kez bastan sona taranmasi gerektigi icin karmasiklik O(n^2). En zor bug, kopyalanan a/b sembollerinin de tekrar kaynak gibi islenmesiydi; q_find durumunu # sembolunde durdurunca bu sorun cozuldu.
+Bu tasar?m 8 ana durum kullan?r: sona gitme, ba?a d?nme, kaynak sembol bulma, `a` kopyalama, `b` kopyalama, kopyadan sonra geri d?nme, restore etme ve kabul. `A`/`C` i?aretleyicileri kopyalanm?? semboller ile hen?z i?lenmemi? kaynak sembolleri ay?rmak i?in gereklidir. Her karakter i?in ?erit birka? kez tarand???ndan karma??kl?k yakla??k `O(n^2)` olur. En zor hata, kopyalanan sembollerin tekrar kaynak gibi i?lenmesiydi; `q_find` durumunu `#` sembol?nde durdurunca bu sorun ??z?ld?.
 
-## TM-4: Student Choice - Binary 4'e Bolunebilirlik
+## TM-4: Student Choice - Binary 4'e B?l?nebilirlik
 
-Strateji: Secim makinesi binary girdinin 4'e bolunup bolunmedigini test eder. Binary sayilarda 0 sayisi veya son iki biti 00 olan sayilar 4'e bolunur. Bu nedenle makine tum girdiyi soldan saga okur ve sadece son bir/iki bit bilgisini durumlarda saklar.
+Strateji: Se?im makinesi binary girdinin 4'e b?l?n?p b?l?nmedi?ini test eder. Binary say?larda `0` say?s? veya son iki biti `00` olan say?lar 4'e b?l?n?r. Bu nedenle makine girdiyi soldan sa?a okur ve yaln?zca son bir veya iki bit bilgisini durumlarda saklar.
 
-Durum sayisi azdir; q_last0/q_last1 tek sembollu girdileri, q_pair00/q_pair01/q_pair10/q_pair11 ise son iki biti temsil eder. Ek serit sembolune gerek yoktur, cunku bu bir karar problemi ve seridi degistirmeden cozulebilir. Karmasiklik O(n), bellek ise durumlar uzerinden sabittir. En zorlandigim kisim tek sembollu 0 girdisini kabul ederken bos girdiyi reddetmekti; q_start uzerinden B okundugunda q_reject'e giderek bu kenar durumu ayrildi.
+Durum say?s? azd?r. `q_last0` ve `q_last1` tek semboll? girdileri, `q_pair00`, `q_pair01`, `q_pair10`, `q_pair11` ise son iki biti temsil eder. Ek ?erit sembol?ne gerek yoktur; ??nk? bu bir karar problemidir ve ?erit de?i?tirilmeden ??z?lebilir. En dikkat isteyen kenar durum, tek semboll? `0` girdisini kabul ederken bo? girdiyi reddetmekti.
 
-## 15 Mayis Test Kapsami Guncellemesi
+## 15 May?s Test Kapsam? G?ncellemesi
 
-Bugunku calismada test dosyasi sadece tekil ornekleri kontrol eden bir dosya olmaktan cikarildi. `unary_to_binary` icin desteklenen 0-16 araliginin tamami, `binary_compare` icin 0-15 arasi tum canonical sayi ciftleri parametrik testlerle kontrol ediliyor. `string_copy` tarafinda daha uzun a/b dizgileri ve bilinmeyen sembol durumlari eklendi. `student_choice` icin de 4'e bolunen, bolunmeyen, bos ve leading-zero iceren girdiler ayrildi. Bu sayede testler hem kabul hem ret hem de no_transition davranislarini daha acik gosteriyor.
+Test dosyas? yaln?zca tekil ?rnekleri kontrol eden bir yap?dan ??kar?ld?. `unary_to_binary` i?in desteklenen 0-16 aral???n?n tamam?, `binary_compare` i?in 0-15 aras? t?m canonical say? ?iftleri parametrik testlerle kontrol ediliyor. `string_copy` taraf?nda daha uzun `a`/`b` dizgileri ve bilinmeyen sembol durumu eklendi. `student_choice` i?in de 4'e b?l?nen, b?l?nmeyen, bo? ve leading-zero i?eren girdiler ayr?ld?. B?ylece testler kabul, ret ve `no_transition` davran??lar?n? daha a??k g?steriyor.
