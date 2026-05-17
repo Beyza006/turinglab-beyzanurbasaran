@@ -10,6 +10,7 @@ Bu not, B?l?m 2 kapsam?nda tasarlanan makinelerin hangi noktada oldu?unu ve test
 - 14 May?s: `binary_compare` 0-15 aras? canonical binary say? ?iftlerini kapsayacak ?ekilde g??lendirildi.
 - 15 May?s: Makine test kapsam? geni?letildi; desteklenen aral?klar ve edge-case davran??lar? otomatik test edildi.
 - 16 May?s: README ve dok?mantasyon T?rk?e karakterler ve kullan?m ?rnekleri a??s?ndan d?zenlendi.
+- 17 May?s: B?l?m 2 final kontrol? yap?ld?; tasar?m notlar? hocan?n bekledi?i 5 soruya g?re d?zenlendi.
 
 ## Makine Durum Tablosu
 
@@ -28,11 +29,15 @@ T?m motor ve makine testleri ?u komutla ?al??t?r?l?r:
 pytest tests -q
 ```
 
-15 May?s itibar?yla beklenen sonu?:
+17 May?s final kontrol?nde beklenen sonu?:
 
 ```text
 344 passed
 ```
+
+## B?l?m 2 Kapan?? Durumu
+
+PDF'te istenen d?rt makine, test dosyas? ve tasar?m notlar? repoda yer al?yor. Test kapsam? 344 testten olu?uyor ve final kontrolde t?m testler ge?iyor. Bu nedenle B?l?m 2, Pazar g?n? itibar?yla kapat?lm?? kabul edilebilir.
 
 ## Kalan ?yile?tirme Fikirleri
 
