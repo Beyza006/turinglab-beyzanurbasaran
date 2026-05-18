@@ -1,46 +1,46 @@
-# B?l?m 2 ?lerleme Notu
+# Bölüm 2 İlerleme Notu
 
-Bu not, B?l?m 2 kapsam?nda tasarlanan makinelerin hangi noktada oldu?unu ve testlerle nas?l do?ruland???n? ?zetler.
+Bu not, Bölüm 2 kapsamında tasarlanan makinelerin hangi noktada olduğunu ve testlerle nasıl doğrulandığını özetler.
 
-## Commit Ak???
+## Commit Akışı
 
-- 13 May?s: `unary_to_binary` ve `binary_compare` i?in ilk YAML taslaklar? eklendi.
-- 13 May?s: `string_copy` ve `student_choice` makineleri eklendi, `design_notes.md` ba?lat?ld?.
-- 14 May?s: `unary_to_binary` kapsam? 0-16 aral???na geni?letildi.
-- 14 May?s: `binary_compare` 0-15 aras? canonical binary say? ?iftlerini kapsayacak ?ekilde g??lendirildi.
-- 15 May?s: Makine test kapsam? geni?letildi; desteklenen aral?klar ve edge-case davran??lar? otomatik test edildi.
-- 16 May?s: README ve dok?mantasyon T?rk?e karakterler ve kullan?m ?rnekleri a??s?ndan d?zenlendi.
-- 17 May?s: B?l?m 2 final kontrol? yap?ld?; tasar?m notlar? hocan?n bekledi?i 5 soruya g?re d?zenlendi.
+- 13 Mayıs: `unary_to_binary` ve `binary_compare` için ilk YAML taslakları eklendi.
+- 13 Mayıs: `string_copy` ve `student_choice` makineleri eklendi, `design_notes.md` başlatıldı.
+- 14 Mayıs: `unary_to_binary` kapsamı 0-16 aralığına genişletildi.
+- 14 Mayıs: `binary_compare` 0-15 arası canonical binary sayı çiftlerini kapsayacak şekilde güçlendirildi.
+- 15 Mayıs: Makine test kapsamı genişletildi; desteklenen aralıklar ve edge-case davranışları otomatik test edildi.
+- 16 Mayıs: README ve dokümantasyon Türkçe karakterler ve kullanım örnekleri açısından düzenlendi.
+- 17 Mayıs: Bölüm 2 final kontrolü yapıldı; tasarım notları hocanın beklediği 5 soruya göre düzenlendi.
 
 ## Makine Durum Tablosu
 
 | Makine | Dosya | Mevcut kapsam | Test durumu |
 | --- | --- | --- | --- |
-| Unary to Binary | `machines/unary_to_binary.yaml` | 0-16 unary uzunlu?u | 17 desteklenen girdi otomatik test ediliyor |
-| Binary Compare | `machines/binary_compare.yaml` | 0-15 aras? canonical `x#y` ?iftleri | 16x16 = 256 ?ift otomatik test ediliyor |
-| String Copy | `machines/string_copy.yaml` | `a`/`b` alfabeli dizgiler | Bo? girdi, tek karakter, kar???k dizgiler ve bilinmeyen sembol testi var |
-| Student Choice | `machines/student_choice.yaml` | Binary 4'e b?l?nebilirlik | Kabul, ret, bo? girdi ve leading-zero testleri var |
+| Unary to Binary | `machines/unary_to_binary.yaml` | 0-16 unary uzunluğu | 17 desteklenen girdi otomatik test ediliyor |
+| Binary Compare | `machines/binary_compare.yaml` | 0-15 arası canonical `x#y` çiftleri | 16x16 = 256 çift otomatik test ediliyor |
+| String Copy | `machines/string_copy.yaml` | `a`/`b` alfabeli dizgiler | Boş girdi, tek karakter, karışık dizgiler ve bilinmeyen sembol testi var |
+| Student Choice | `machines/student_choice.yaml` | Binary 4'e bölünebilirlik | Kabul, ret, boş girdi ve leading-zero testleri var |
 
-## Do?rulama Komutu
+## Doğrulama Komutu
 
-T?m motor ve makine testleri ?u komutla ?al??t?r?l?r:
+Tüm motor ve makine testleri şu komutla çalıştırılır:
 
 ```bash
 pytest tests -q
 ```
 
-17 May?s final kontrol?nde beklenen sonu?:
+17 Mayıs final kontrolünde beklenen sonuç:
 
 ```text
 344 passed
 ```
 
-## B?l?m 2 Kapan?? Durumu
+## Bölüm 2 Kapanış Durumu
 
-PDF'te istenen d?rt makine, test dosyas? ve tasar?m notlar? repoda yer al?yor. Test kapsam? 344 testten olu?uyor ve final kontrolde t?m testler ge?iyor. Bu nedenle B?l?m 2, Pazar g?n? itibar?yla kapat?lm?? kabul edilebilir.
+PDF'te istenen dört makine, test dosyası ve tasarım notları repoda yer alıyor. Test kapsamı 344 testten oluşuyor ve final kontrolde tüm testler geçiyor. Bu nedenle Bölüm 2, Pazar günü itibarıyla kapatılmış kabul edilebilir.
 
-## Kalan ?yile?tirme Fikirleri
+## Kalan İyileştirme Fikirleri
 
-- `unary_to_binary` i?in finite aral?ktan genel binary saya? algoritmas?na ge?mek.
-- `binary_compare` i?in finite karar a?ac? yerine i?aretleyicili genel uzunluk/bit kar??la?t?rma algoritmas? kurmak.
-- B?l?m 3'e ge?meden ?nce demo videosu ve mini-rapor i?in senaryo haz?rlamak.
+- `unary_to_binary` için finite aralıktan genel binary sayaç algoritmasına geçmek.
+- `binary_compare` için finite karar ağacı yerine işaretleyicili genel uzunluk/bit karşılaştırma algoritması kurmak.
+- Bölüm 3'e geçmeden önce demo videosu ve mini-rapor için senaryo hazırlamak.

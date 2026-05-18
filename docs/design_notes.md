@@ -1,6 +1,6 @@
-# B?l?m 2 Tasar?m Notlar?
+# Bölüm 2 Tasarım Notları
 
-Bu dosya, B?l?m 2 kapsam?nda tasarlanan d?rt Turing makinesinin tasar?m kararlar?n? a??klar. Her makine i?in strateji, durum say?s?, ?erit alfabesi, karma??kl?k ve hata ay?klama notlar? ayr? ayr? verilmi?tir.
+Bu dosya, Bölüm 2 kapsamında tasarlanan dört Turing makinesinin tasarım kararlarını açıklar. Her makine için strateji, durum sayısı, şerit alfabesi, karmaşıklık ve hata ayıklama notları ayrı ayrı verilmiştir.
 
 ---
 
@@ -8,25 +8,25 @@ Bu dosya, B?l?m 2 kapsam?nda tasarlanan d?rt Turing makinesinin tasar?m kararlar
 
 ### 1. Strateji
 
-Bu makine unary girdiyi ?nce uzunluk olarak sayar. Desteklenen aral?kta ka? tane `1` oldu?unu durumlar ?zerinden takip eder, sonra ?eridin soluna bu say?n?n binary kar??l???n? yazar. Son olarak eski unary sembollerinden arta kalan h?creleri `B` ile temizler. ?rne?in `111` girdisi 3 say?s?n? temsil eder ve sonu?ta ?eritte `11` kal?r.
+Bu makine unary girdiyi önce uzunluk olarak sayar. Desteklenen aralıkta kaç tane `1` olduğunu durumlar üzerinden takip eder, sonra şeridin soluna bu sayının binary karşılığını yazar. Son olarak eski unary sembollerinden arta kalan hücreleri `B` ile temizler. Örneğin `111` girdisi 3 sayısını temsil eder ve sonuçta şeritte `11` kalır.
 
-Bu s?r?m 0-16 aral???n? kapsar. Daha genel bir s?r?mde her i?lenmemi? unary `1` i?in ayr? bir binary saya? art?rma algoritmas? kurulabilir. Bu yakla??m daha az s?n?rl? olurdu, fakat B?l?m 2 ilerlemesinde ?nce d?n???m mant???n? test edilebilir hale getirmek hedeflendi.
+Bu sürüm 0-16 aralığını kapsar. Daha genel bir sürümde her işlenmemiş unary `1` için ayrı bir binary sayaç artırma algoritması kurulabilir. Bu yaklaşım daha az sınırlı olurdu, fakat Bölüm 2 ilerlemesinde önce dönüşüm mantığını test edilebilir hale getirmek hedeflendi.
 
-### 2. Durum Say?s?
+### 2. Durum Sayısı
 
-Durum say?s? g?rece y?ksektir; ??nk? makine sayma, ba?a d?nme, binary sonucu yazma ve eski sembolleri temizleme fazlar?na ayr?lm??t?r. Her desteklenen say? i?in yaz?lacak binary ??kt?y? temsil eden ayr? yazma durumlar? vard?r. Daha genel saya?l? tasar?mda say? ba??na ayr? durum a?mak yerine ayn? art?rma d?ng?s? tekrar kullan?labilirdi.
+Durum sayısı görece yüksektir; çünkü makine sayma, başa dönme, binary sonucu yazma ve eski sembolleri temizleme fazlarına ayrılmıştır. Her desteklenen sayı için yazılacak binary çıktıyı temsil eden ayrı yazma durumları vardır. Daha genel sayaçlı tasarımda sayı başına ayrı durum açmak yerine aynı artırma döng@uşu@ tekrar kullanılabilirdi.
 
-### 3. ?erit Alfabesi
+### 3. Şerit Alfabesi
 
-?erit alfabesi `0`, `1`, `B` ve `X` sembollerinden olu?ur. `0` ve `1` binary ??kt? i?in, `B` blank sembol i?in kullan?l?r. `X` bu s?r?mde aktif olarak kullan?lmasa da genel s?r?me ge?ildi?inde i?lenmi? unary sembollerini i?aretlemek i?in do?al bir yard?mc? sembold?r.
+Şerit alfabesi `0`, `1`, `B` ve `X` sembollerinden oluşur. `0` ve `1` binary çıktı için, `B` blank sembol için kullanılır. `X` bu sürümde aktif olarak kullanılmasa da genel sürüme geçildiğinde işlenmiş unary sembollerini işaretlemek için doğal bir yardımcı semboldür.
 
-### 4. Karma??kl?k
+### 4. Karmaşıklık
 
-Desteklenen aral?kta makine ?nce girdiyi sa?a do?ru tarar, sonra sola d?n?p sonucu yazar ve kalan h?creleri temizler. Bu nedenle pratik ?al??ma maliyeti girdi uzunlu?u ile do?rusal ilerler. Genel binary saya? algoritmas?na ge?ilirse her unary sembol i?in binary saya? g?ncellenece?inden maliyet daha y?ksek, yakla??k `O(n log n)` veya uygulama ayr?nt?s?na g?re `O(n^2)` olabilir.
+Desteklenen aralıkta makine önce girdiyi sağa doğru tarar, sonra sola dönüp sonucu yazar ve kalan hücreleri temizler. Bu nedenle pratik çalışma maliyeti girdi uzunluğu ile doğrusal ilerler. Genel binary sayaç algoritmasına geçilirse her unary sembol için binary sayaç güncelleneceğinden maliyet daha yüksek olabilir.
 
-### 5. Hata Ay?klama Hikayesi
+### 5. Hata Ayıklama Hikayesi
 
-En zor hata, binary sonu? yaz?ld?ktan sonra eski unary sembollerinin ?eritte kalmas?yd?. ?rne?in `11111` girdisinde `101` yaz?lsa bile sa? tarafta eski `1` sembolleri kal?nca final ??kt? kirleniyordu. Bunu ??zmek i?in sonu? yaz?m?ndan sonra ?al??an ayr? bir `q_clear` faz? eklendi.
+En zor hata, binary sonuç yazıldıktan sonra eski unary sembollerinin şeritte kalmasıydı. Örneğin `11111` girdisinde `101` yazılsa bile sağ tarafta eski `1` sembolleri kalınca final çıktı kirleniyordu. Bunu çözmek için sonuç yazımından sonra çalışan ayrı bir `q_clear` fazı eklendi.
 
 ---
 
@@ -34,25 +34,23 @@ En zor hata, binary sonu? yaz?ld?ktan sonra eski unary sembollerinin ?eritte kal
 
 ### 1. Strateji
 
-Bu makine `x#y` bi?imindeki iki canonical binary say?y? kar??la?t?r?r. Mevcut s?r?m 0-15 aras? t?m canonical say? ?iftlerini kapsayan geni?letilmi? bir karar a?ac? olarak tasarland?. Makine girdiyi soldan sa?a okur; tam bir tan?ml? ?r?nt?n?n sonuna geldi?inde `x > y` ise kabul, aksi durumda ret durumuna ge?er.
+Bu makine `x#y` biçimindeki iki canonical binary sayıyı karşılaştırır. Mevcut sürüm 0-15 arası tüm canonical sayı çiftlerini kapsayan genişletilmiş bir karar ağacı olarak tasarlandı. Makine girdiyi soldan sağa okur; tam bir tanımlı örüntünün sonuna geldiğinde `x > y` ise kabul, aksi durumda ret durumuna geçer.
 
-Bu ??z?m, kar??la?t?rma problemini test edilebilir ve deterministik hale getirir. Daha genel s?r?mde ?nce say? uzunluklar? kar??la?t?r?labilir, uzunluklar e?itse soldan sa?a ilk farkl? bit bulunarak karar verilebilir.
+### 2. Durum Sayısı
 
-### 2. Durum Say?s?
+Durum sayısı, 0-15 arası tüm `x#y` çiftlerinin prefix ağacından gelir. Ortak başlang@içlar paylaşıldığı için her girdi için tamamen ayrı yol açılmadı. Yine de finite karar ağacı yaklaşımı genel algoritmaya göre daha fazla durum üretir.
 
-Durum say?s?, 0-15 aras? t?m `x#y` ?iftlerinin prefix a?ac?ndan gelir. Ortak ba?lang??lar payla??ld??? i?in her girdi i?in tamamen ayr? yol a??lmad?. Yine de finite karar a?ac? yakla??m? genel algoritmaya g?re daha fazla durum ?retir.
+### 3. Şerit Alfabesi
 
-### 3. ?erit Alfabesi
+Şerit alfabesi `0`, `1`, `#` ve `B` sembollerinden oluşur. Makine şeridi değiştirmez; yalnızca okuma yaparak karar verir. Bu nedenle ek işaretleyici sembole ihtiyaç duyulmadı.
 
-?erit alfabesi `0`, `1`, `#` ve `B` sembollerinden olu?ur. Makine ?eridi de?i?tirmez; yaln?zca okuma yaparak karar verir. Bu nedenle ek i?aretleyici sembole ihtiya? duyulmad?.
+### 4. Karmaşıklık
 
-### 4. Karma??kl?k
+Makine her tanımlı girdiyi soldan sağa bir kez okur. Bu yüzden desteklenen girdiler için çalışma süresi `O(n)`dir. Genel işaretleyicili algoritmada tek şerit üzerinde ileri-geri tarama gerekeceği için maliyet daha yüksek olabilir.
 
-Makine her tan?ml? girdiyi soldan sa?a bir kez okur. Bu y?zden desteklenen girdiler i?in ?al??ma s?resi `O(n)`dir. Genel i?aretleyicili algoritmada tek ?erit ?zerinde ileri-geri tarama gerekece?i i?in maliyet daha y?ksek olabilir.
+### 5. Hata Ayıklama Hikayesi
 
-### 5. Hata Ay?klama Hikayesi
-
-?lk taslakta baz? ret durumlar? `no_transition` ile bitiyordu. Bu, testlerde sonucu belirsiz g?steriyordu. ?zellikle e?it say?lar i?in a??k bir `q_reject` durumuna gitmek daha do?ru oldu. B?ylece `101#101` gibi girdiler ger?ekten reddediliyor ve `reason == "reject"` olarak g?r?lebiliyor.
+İlk taslakta bazı ret durumları `no_transition` ile bitiyordu. Bu, testlerde sonucu belirsiz gösteriyordu. Özellikle eşit sayılar için açık bir `q_reject` durumuna gitmek daha doğru oldu. Böylece `101#101` gibi girdiler gerçekten reddediliyor ve `reason == "reject"` olarak görülebiliyor.
 
 ---
 
@@ -60,50 +58,50 @@ Makine her tan?ml? girdiyi soldan sa?a bir kez okur. Bu y?zden desteklenen girdi
 
 ### 1. Strateji
 
-Bu makine `a` ve `b` alfabeli bir dizgiyi `w#w` bi?iminde kopyalar. ?lk olarak girdinin sonuna `#` ay?rac? yerle?tirilir. Sonra soldan sa?a ilk i?aretlenmemi? sembol bulunur. `a` sembol? `A`, `b` sembol? `C` ile i?aretlenir; makine ?eridin sonuna gider ve ayn? sembol? kopyalar. T?m kaynak semboller i?aretlenince makine restore faz?na ge?er ve `A/C` i?aretlerini tekrar `a/b` yapar.
+Bu makine `a` ve `b` alfabeli bir dizgiyi `w#w` biçiminde kopyalar. İlk olarak girdinin sonuna `#` ayracı yerleştirilir. Sonra soldan sağa ilk işaretlenmemiş sembol bulunur. `a` sembolü `A`, `b` sembolü `C` ile işaretlenir; makine şeridin sonuna gider ve aynı sembolü kopyalar. Tüm kaynak semboller işaretlenince makine restore fazına geçer ve `A/C` işaretlerini tekrar `a/b` yapar.
 
-### 2. Durum Say?s?
+### 2. Durum Sayısı
 
-Makine 8 ana faz kullan?r: sona gitme, ba?a d?nme, kaynak sembol bulma, `a` kopyalama, `b` kopyalama, kopyadan sonra geri d?nme, restore etme ve kabul. Bu ayr?m, algoritman?n okunmas?n? ve test edilmesini kolayla?t?rd?.
+Makine 8 ana faz kullanır: sona gitme, başa dönme, kaynak sembol bulma, `a` kopyalama, `b` kopyalama, kopyadan sonra geri dönme, restore etme ve kabul. Bu ayrım, algoritmanın okunmasını ve test edilmesini kolaylaştırdı.
 
-### 3. ?erit Alfabesi
+### 3. Şerit Alfabesi
 
-?erit alfabesi `a`, `b`, `B`, `#`, `A` ve `C` sembollerinden olu?ur. `#` kaynak ve kopya b?lgesini ay?r?r. `A` ve `C`, kaynak tarafta daha ?nce i?lenmi? karakterleri g?sterir. `C` sembol?, `B` blank sembol?yle kar??mamas? i?in `b` i?aretleyicisi olarak se?ildi.
+Şerit alfabesi `a`, `b`, `B`, `#`, `A` ve `C` sembollerinden oluşur. `#` kaynak ve kopya bölgesini ayırır. `A` ve `C`, kaynak tarafta daha önce işlenmiş karakterleri gösterir. `C` sembolü, `B` blank sembolüyle karışmaması için `b` işaretleyicisi olarak seçildi.
 
-### 4. Karma??kl?k
+### 4. Karmaşıklık
 
-Her karakter i?in makine kaynak b?lgeden kopya b?lgesinin sonuna kadar gidip tekrar ba?a d?ner. Bu y?zden toplam hareket say?s? yakla??k `O(n^2)`dir. Tek ?eritli TM i?in bu beklenen bir maliyettir; ?ok ?eritli bir tasar?mda kopyalama daha verimli yap?labilirdi.
+Her karakter için makine kaynak bölgeden kopya bölgesinin sonuna kadar gidip tekrar başa döner. Bu yüzden toplam hareket sayısı yaklaşık `O(n^2)`dir. Tek şeritli TM için bu beklenen bir maliyettir.
 
-### 5. Hata Ay?klama Hikayesi
+### 5. Hata Ayıklama Hikayesi
 
-En ?nemli hata, kopyalanan `a/b` sembollerinin tekrar kaynak sembol gibi i?lenmesiydi. Makine kopya alan?na ge?tikten sonra yeniden kopyalama yapmaya ?al???yordu. Bunu `q_find` durumunun `#` sembol?nde durmas?n? sa?layarak ??zd?m. B?ylece yaln?zca `#` ?ncesindeki kaynak b?lge taran?yor.
+En önemli hata, kopyalanan `a/b` sembollerinin tekrar kaynak sembol gibi işlenmesiydi. Makine kopya alanına geçtikten sonra yeniden kopyalama yapmaya çalışıyordu. Bunu `q_find` durumunun `#` sembolünde durmasını sağlayarak çözdüm.
 
 ---
 
-## TM-4: Student Choice - Binary 4'e B?l?nebilirlik
+## TM-4: Student Choice - Binary 4'e Bölünebilirlik
 
 ### 1. Strateji
 
-??renci se?imi olarak binary girdinin 4'e b?l?n?p b?l?nmedi?ini test eden makine se?ildi. Binary say?larda `0` say?s? veya son iki biti `00` olan say?lar 4'e b?l?n?r. Bu nedenle makine t?m girdiyi soldan sa?a okur ve sadece son bir veya iki bit bilgisini durumlarda saklar.
+Öğrenci seçimi olarak binary girdinin 4'e bölünüp bölünmediğini test eden makine seçildi. Binary sayılarda `0` sayısı veya son iki biti `00` olan sayılar 4'e bölünür. Bu nedenle makine tüm girdiyi soldan sağa okur ve yalnızca son bir veya iki bit bilgisini durumlarda saklar.
 
-### 2. Durum Say?s?
+### 2. Durum Sayısı
 
-Durum say?s? azd?r. `q_last0` ve `q_last1` tek semboll? girdileri temsil eder. `q_pair00`, `q_pair01`, `q_pair10`, `q_pair11` ise en son g?r?len iki biti saklar. Girdi bitti?inde makine bu duruma g?re kabul veya ret verir.
+Durum sayısı azdır. `q_last0` ve `q_last1` tek sembollü girdileri temsil eder. `q_pair00`, `q_pair01`, `q_pair10`, `q_pair11` ise en son görülen iki biti saklar. Girdi bittiğinde makine bu duruma göre kabul veya ret verir.
 
-### 3. ?erit Alfabesi
+### 3. Şerit Alfabesi
 
-?erit alfabesi yaln?zca `0`, `1` ve `B` sembollerinden olu?ur. Bu makine bir karar problemi ??zd??? i?in ?eridi de?i?tirmeye veya yard?mc? i?aretleyici kullanmaya gerek yoktur.
+Şerit alfabesi yalnızca `0`, `1` ve `B` sembollerinden oluşur. Bu makine bir karar problemi çözdüğü için şeridi değiştirmeye veya yardımcı işaretleyici kullanmaya gerek yoktur.
 
-### 4. Karma??kl?k
+### 4. Karmaşıklık
 
-Makine girdiyi bir kez soldan sa?a okur. Bu nedenle ?al??ma s?resi `O(n)`dir. Kullan?lan bilgi yaln?zca son bitler oldu?u i?in durum belle?i sabittir.
+Makine girdiyi bir kez soldan sağa okur. Bu nedenle çalışma süresi `O(n)`dir. Kullanılan bilgi yalnızca son bitler olduğu için durum belleği sabittir.
 
-### 5. Hata Ay?klama Hikayesi
+### 5. Hata Ayıklama Hikayesi
 
-En dikkat isteyen kenar durum, tek semboll? `0` girdisini kabul ederken bo? girdiyi reddetmekti. E?er ba?lang?? durumunda `B` do?rudan kabul edilseydi bo? girdi de kabul edilmi? olurdu. Bu nedenle `q_start` durumunda `B` okununca makine `q_reject` durumuna gider.
+En dikkat isteyen kenar durum, tek sembollü `0` girdisini kabul ederken boş girdiyi reddetmekti. Eğer başlang@iç durumunda `B` doğrudan kabul edilseydi boş girdi de kabul edilmiş olurdu. Bu nedenle `q_start` durumunda `B` okununca makine `q_reject` durumuna gider.
 
 ---
 
-## Final Kontrol Notu - 17 May?s
+## Final Kontrol Notu - 17 Mayıs
 
-17 May?s Pazar g?n? B?l?m 2 i?in final kontrol yap?ld?. D?rt makine dosyas?, `tests/test_machines.py`, `docs/design_notes.md` ve `docs/week2_progress.md` dosyalar? yerinde. Test kapsam? geni?letilmi? durumda ve t?m testler ge?iyor. Bu noktada B?l?m 2, dosya yap?s? ve dok?mantasyon a??s?ndan kapat?labilir durumdad?r.
+17 Mayıs Pazar günü Bölüm 2 için final kontrol yapıldı. Dört makine dosyası, `tests/test_machines.py`, `docs/design_notes.md` ve `docs/week2_progress.md` dosyaları yerinde. Test kapsamı genişletilmiş durumda ve tüm testler geçiyor. Bu noktada Bölüm 2, dosya yapısı ve dokümantasyon açısından kapatılabilir durumdadır.
