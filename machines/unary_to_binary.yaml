@@ -1,133 +1,75 @@
 name: "unary_to_binary"
-description: "Unary sayiyi 0-16 araliginda binary gosterime cevirir. Ornek: 111 -> 11"
+description: >
+  Unary girdiyi binary'e cevirir. Sinirsiz uzunluk: her unary '1' icin
+  negatif sutunlarda tutulan binary sayaci 1 artirir.
+  Strateji:
+    - Faz 1 (q_convert): tum input '1'lerini 'I' yap, sona '#' koy.
+    - Faz 2 (q_init_binary): sola yuru, pozisyon -1'e '0' yaz (baslangic binary).
+    - Faz 3 (iteratif): en sagdaki isaretsiz I'yi bul (q_find_hash -> q_seek_I),
+      X yap, sola don, LSB'de increment uygula (carry sola yayilir).
+    - Faz 4 (q_cleanup): I/X/# kalintilarini B yap; geriye sadece binary kalir.
+  Sembol ayrimi:
+    '0','1' = binary basamak (negatif pozisyonlar)
+    'I'     = isaretsiz unary (input '1'inin donusumu)
+    'X'     = islenmis unary
+    '#'     = input bolgesinin sag siniri
 
-states: [q_count0, q_count1, q_back_1, q_w1_0, q_count2, q_back_2, q_w2_0, q_w2_1, q_count3, q_back_3, q_w3_0, q_w3_1, q_count4, q_back_4, q_w4_0, q_w4_1, q_w4_2, q_count5, q_back_5, q_w5_0, q_w5_1, q_w5_2, q_count6, q_back_6, q_w6_0, q_w6_1, q_w6_2, q_count7, q_back_7, q_w7_0, q_w7_1, q_w7_2, q_count8, q_back_8, q_w8_0, q_w8_1, q_w8_2, q_w8_3, q_count9, q_back_9, q_w9_0, q_w9_1, q_w9_2, q_w9_3, q_count10, q_back_10, q_w10_0, q_w10_1, q_w10_2, q_w10_3, q_count11, q_back_11, q_w11_0, q_w11_1, q_w11_2, q_w11_3, q_count12, q_back_12, q_w12_0, q_w12_1, q_w12_2, q_w12_3, q_count13, q_back_13, q_w13_0, q_w13_1, q_w13_2, q_w13_3, q_count14, q_back_14, q_w14_0, q_w14_1, q_w14_2, q_w14_3, q_count15, q_back_15, q_w15_0, q_w15_1, q_w15_2, q_w15_3, q_count16, q_back_16, q_w16_0, q_w16_1, q_w16_2, q_w16_3, q_w16_4, q_clear, q_accept]
+states:
+  - q_start
+  - q_convert
+  - q_init_binary
+  - q_find_hash
+  - q_seek_I
+  - q_back_to_binary
+  - q_carry
+  - q_cleanup
+  - q_accept
+
 input_alphabet: ["1"]
-tape_alphabet: ["0", "1", "B", "X"]
+tape_alphabet: ["0", "1", "B", "I", "X", "#"]
 blank: "B"
-start_state: q_count0
+start_state: q_start
 accept_states: [q_accept]
 reject_states: []
 
 transitions:
-  - {state: q_count0, read: "B", next: q_accept, write: "0", move: R}
-  - {state: q_count0, read: "1", next: q_count1, write: "1", move: R}
-  - {state: q_count1, read: "1", next: q_count2, write: "1", move: R}
-  - {state: q_count1, read: "B", next: q_back_1, write: "B", move: L}
-  - {state: q_count2, read: "1", next: q_count3, write: "1", move: R}
-  - {state: q_count2, read: "B", next: q_back_2, write: "B", move: L}
-  - {state: q_count3, read: "1", next: q_count4, write: "1", move: R}
-  - {state: q_count3, read: "B", next: q_back_3, write: "B", move: L}
-  - {state: q_count4, read: "1", next: q_count5, write: "1", move: R}
-  - {state: q_count4, read: "B", next: q_back_4, write: "B", move: L}
-  - {state: q_count5, read: "1", next: q_count6, write: "1", move: R}
-  - {state: q_count5, read: "B", next: q_back_5, write: "B", move: L}
-  - {state: q_count6, read: "1", next: q_count7, write: "1", move: R}
-  - {state: q_count6, read: "B", next: q_back_6, write: "B", move: L}
-  - {state: q_count7, read: "1", next: q_count8, write: "1", move: R}
-  - {state: q_count7, read: "B", next: q_back_7, write: "B", move: L}
-  - {state: q_count8, read: "1", next: q_count9, write: "1", move: R}
-  - {state: q_count8, read: "B", next: q_back_8, write: "B", move: L}
-  - {state: q_count9, read: "1", next: q_count10, write: "1", move: R}
-  - {state: q_count9, read: "B", next: q_back_9, write: "B", move: L}
-  - {state: q_count10, read: "1", next: q_count11, write: "1", move: R}
-  - {state: q_count10, read: "B", next: q_back_10, write: "B", move: L}
-  - {state: q_count11, read: "1", next: q_count12, write: "1", move: R}
-  - {state: q_count11, read: "B", next: q_back_11, write: "B", move: L}
-  - {state: q_count12, read: "1", next: q_count13, write: "1", move: R}
-  - {state: q_count12, read: "B", next: q_back_12, write: "B", move: L}
-  - {state: q_count13, read: "1", next: q_count14, write: "1", move: R}
-  - {state: q_count13, read: "B", next: q_back_13, write: "B", move: L}
-  - {state: q_count14, read: "1", next: q_count15, write: "1", move: R}
-  - {state: q_count14, read: "B", next: q_back_14, write: "B", move: L}
-  - {state: q_count15, read: "1", next: q_count16, write: "1", move: R}
-  - {state: q_count15, read: "B", next: q_back_15, write: "B", move: L}
-  - {state: q_count16, read: "B", next: q_back_16, write: "B", move: L}
-  - {state: q_back_1, read: "1", next: q_back_1, write: "1", move: L}
-  - {state: q_back_1, read: "B", next: q_w1_0, write: "B", move: R}
-  - {state: q_w1_0, read: "1", next: q_clear, write: "1", move: R}
-  - {state: q_back_2, read: "1", next: q_back_2, write: "1", move: L}
-  - {state: q_back_2, read: "B", next: q_w2_0, write: "B", move: R}
-  - {state: q_w2_0, read: "1", next: q_w2_1, write: "1", move: R}
-  - {state: q_w2_1, read: "1", next: q_clear, write: "0", move: R}
-  - {state: q_back_3, read: "1", next: q_back_3, write: "1", move: L}
-  - {state: q_back_3, read: "B", next: q_w3_0, write: "B", move: R}
-  - {state: q_w3_0, read: "1", next: q_w3_1, write: "1", move: R}
-  - {state: q_w3_1, read: "1", next: q_clear, write: "1", move: R}
-  - {state: q_back_4, read: "1", next: q_back_4, write: "1", move: L}
-  - {state: q_back_4, read: "B", next: q_w4_0, write: "B", move: R}
-  - {state: q_w4_0, read: "1", next: q_w4_1, write: "1", move: R}
-  - {state: q_w4_1, read: "1", next: q_w4_2, write: "0", move: R}
-  - {state: q_w4_2, read: "1", next: q_clear, write: "0", move: R}
-  - {state: q_back_5, read: "1", next: q_back_5, write: "1", move: L}
-  - {state: q_back_5, read: "B", next: q_w5_0, write: "B", move: R}
-  - {state: q_w5_0, read: "1", next: q_w5_1, write: "1", move: R}
-  - {state: q_w5_1, read: "1", next: q_w5_2, write: "0", move: R}
-  - {state: q_w5_2, read: "1", next: q_clear, write: "1", move: R}
-  - {state: q_back_6, read: "1", next: q_back_6, write: "1", move: L}
-  - {state: q_back_6, read: "B", next: q_w6_0, write: "B", move: R}
-  - {state: q_w6_0, read: "1", next: q_w6_1, write: "1", move: R}
-  - {state: q_w6_1, read: "1", next: q_w6_2, write: "1", move: R}
-  - {state: q_w6_2, read: "1", next: q_clear, write: "0", move: R}
-  - {state: q_back_7, read: "1", next: q_back_7, write: "1", move: L}
-  - {state: q_back_7, read: "B", next: q_w7_0, write: "B", move: R}
-  - {state: q_w7_0, read: "1", next: q_w7_1, write: "1", move: R}
-  - {state: q_w7_1, read: "1", next: q_w7_2, write: "1", move: R}
-  - {state: q_w7_2, read: "1", next: q_clear, write: "1", move: R}
-  - {state: q_back_8, read: "1", next: q_back_8, write: "1", move: L}
-  - {state: q_back_8, read: "B", next: q_w8_0, write: "B", move: R}
-  - {state: q_w8_0, read: "1", next: q_w8_1, write: "1", move: R}
-  - {state: q_w8_1, read: "1", next: q_w8_2, write: "0", move: R}
-  - {state: q_w8_2, read: "1", next: q_w8_3, write: "0", move: R}
-  - {state: q_w8_3, read: "1", next: q_clear, write: "0", move: R}
-  - {state: q_back_9, read: "1", next: q_back_9, write: "1", move: L}
-  - {state: q_back_9, read: "B", next: q_w9_0, write: "B", move: R}
-  - {state: q_w9_0, read: "1", next: q_w9_1, write: "1", move: R}
-  - {state: q_w9_1, read: "1", next: q_w9_2, write: "0", move: R}
-  - {state: q_w9_2, read: "1", next: q_w9_3, write: "0", move: R}
-  - {state: q_w9_3, read: "1", next: q_clear, write: "1", move: R}
-  - {state: q_back_10, read: "1", next: q_back_10, write: "1", move: L}
-  - {state: q_back_10, read: "B", next: q_w10_0, write: "B", move: R}
-  - {state: q_w10_0, read: "1", next: q_w10_1, write: "1", move: R}
-  - {state: q_w10_1, read: "1", next: q_w10_2, write: "0", move: R}
-  - {state: q_w10_2, read: "1", next: q_w10_3, write: "1", move: R}
-  - {state: q_w10_3, read: "1", next: q_clear, write: "0", move: R}
-  - {state: q_back_11, read: "1", next: q_back_11, write: "1", move: L}
-  - {state: q_back_11, read: "B", next: q_w11_0, write: "B", move: R}
-  - {state: q_w11_0, read: "1", next: q_w11_1, write: "1", move: R}
-  - {state: q_w11_1, read: "1", next: q_w11_2, write: "0", move: R}
-  - {state: q_w11_2, read: "1", next: q_w11_3, write: "1", move: R}
-  - {state: q_w11_3, read: "1", next: q_clear, write: "1", move: R}
-  - {state: q_back_12, read: "1", next: q_back_12, write: "1", move: L}
-  - {state: q_back_12, read: "B", next: q_w12_0, write: "B", move: R}
-  - {state: q_w12_0, read: "1", next: q_w12_1, write: "1", move: R}
-  - {state: q_w12_1, read: "1", next: q_w12_2, write: "1", move: R}
-  - {state: q_w12_2, read: "1", next: q_w12_3, write: "0", move: R}
-  - {state: q_w12_3, read: "1", next: q_clear, write: "0", move: R}
-  - {state: q_back_13, read: "1", next: q_back_13, write: "1", move: L}
-  - {state: q_back_13, read: "B", next: q_w13_0, write: "B", move: R}
-  - {state: q_w13_0, read: "1", next: q_w13_1, write: "1", move: R}
-  - {state: q_w13_1, read: "1", next: q_w13_2, write: "1", move: R}
-  - {state: q_w13_2, read: "1", next: q_w13_3, write: "0", move: R}
-  - {state: q_w13_3, read: "1", next: q_clear, write: "1", move: R}
-  - {state: q_back_14, read: "1", next: q_back_14, write: "1", move: L}
-  - {state: q_back_14, read: "B", next: q_w14_0, write: "B", move: R}
-  - {state: q_w14_0, read: "1", next: q_w14_1, write: "1", move: R}
-  - {state: q_w14_1, read: "1", next: q_w14_2, write: "1", move: R}
-  - {state: q_w14_2, read: "1", next: q_w14_3, write: "1", move: R}
-  - {state: q_w14_3, read: "1", next: q_clear, write: "0", move: R}
-  - {state: q_back_15, read: "1", next: q_back_15, write: "1", move: L}
-  - {state: q_back_15, read: "B", next: q_w15_0, write: "B", move: R}
-  - {state: q_w15_0, read: "1", next: q_w15_1, write: "1", move: R}
-  - {state: q_w15_1, read: "1", next: q_w15_2, write: "1", move: R}
-  - {state: q_w15_2, read: "1", next: q_w15_3, write: "1", move: R}
-  - {state: q_w15_3, read: "1", next: q_clear, write: "1", move: R}
-  - {state: q_back_16, read: "1", next: q_back_16, write: "1", move: L}
-  - {state: q_back_16, read: "B", next: q_w16_0, write: "B", move: R}
-  - {state: q_w16_0, read: "1", next: q_w16_1, write: "1", move: R}
-  - {state: q_w16_1, read: "1", next: q_w16_2, write: "0", move: R}
-  - {state: q_w16_2, read: "1", next: q_w16_3, write: "0", move: R}
-  - {state: q_w16_3, read: "1", next: q_w16_4, write: "0", move: R}
-  - {state: q_w16_4, read: "1", next: q_clear, write: "0", move: R}
-  - {state: q_clear, read: "1", next: q_clear, write: "B", move: R}
-  - {state: q_clear, read: "B", next: q_accept, write: "B", move: R}
+  # --- q_start: bos girdi veya ilk '1' ---
+  - {state: q_start, read: "B", next: q_accept, write: "0", move: R}   # bos -> "0"
+  - {state: q_start, read: "1", next: q_convert, write: "I", move: R}
+
+  # --- q_convert: kalan input '1'lerini 'I'ye cevir, sona '#' yaz ---
+  - {state: q_convert, read: "1", next: q_convert, write: "I", move: R}
+  - {state: q_convert, read: "B", next: q_init_binary, write: "#", move: L}
+
+  # --- q_init_binary: sola yuru, pozisyon -1'e baslangic '0' yaz ---
+  - {state: q_init_binary, read: "I", next: q_init_binary, write: "I", move: L}
+  - {state: q_init_binary, read: "B", next: q_find_hash, write: "0", move: R}
+
+  # --- q_find_hash: sag yone '#'i bul (binary ve input bolgelerinden gec) ---
+  - {state: q_find_hash, read: "0", next: q_find_hash, write: "0", move: R}
+  - {state: q_find_hash, read: "1", next: q_find_hash, write: "1", move: R}
+  - {state: q_find_hash, read: "I", next: q_find_hash, write: "I", move: R}
+  - {state: q_find_hash, read: "X", next: q_find_hash, write: "X", move: R}
+  - {state: q_find_hash, read: "#", next: q_seek_I, write: "#", move: L}
+
+  # --- q_seek_I: '#'ten sola yuruyerek en sagdaki I'yi bul ve X yap ---
+  - {state: q_seek_I, read: "X", next: q_seek_I, write: "X", move: L}
+  - {state: q_seek_I, read: "I", next: q_back_to_binary, write: "X", move: L}
+  # Eger binary digite varirsak (I kalmadi) -> temizlik
+  - {state: q_seek_I, read: "0", next: q_cleanup, write: "0", move: R}
+  - {state: q_seek_I, read: "1", next: q_cleanup, write: "1", move: R}
+
+  # --- q_back_to_binary: I'lerden sola gec, LSB'ye var ---
+  - {state: q_back_to_binary, read: "I", next: q_back_to_binary, write: "I", move: L}
+  # LSB'de increment
+  - {state: q_back_to_binary, read: "0", next: q_find_hash, write: "1", move: R}
+  - {state: q_back_to_binary, read: "1", next: q_carry, write: "0", move: L}
+
+  # --- q_carry: carry'yi sola yay; gerekirse yeni MSB ekle ---
+  - {state: q_carry, read: "0", next: q_find_hash, write: "1", move: R}
+  - {state: q_carry, read: "1", next: q_carry, write: "0", move: L}
+  - {state: q_carry, read: "B", next: q_find_hash, write: "1", move: R}   # yeni MSB
+
+  # --- q_cleanup: X'leri ve '#'i B yap, geriye sadece binary kalsin ---
+  - {state: q_cleanup, read: "X", next: q_cleanup, write: "B", move: R}
+  - {state: q_cleanup, read: "#", next: q_accept, write: "B", move: R}
