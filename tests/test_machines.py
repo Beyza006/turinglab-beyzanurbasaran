@@ -144,9 +144,16 @@ class TestStudentChoiceDivisibleByFour:
 
 
 class TestExpandedMachineCoverage:
-    @pytest.mark.parametrize("count", range(17))
+    @pytest.mark.parametrize("count", range(33))
     def test_unary_to_binary_all_supported_counts(self, count):
-        result = run_machine("unary_to_binary.yaml", "1" * count)
+        result = run_machine("unary_to_binary.yaml", "1" * count, max_steps=20000)
+        assert result.accepted is True
+        assert result.final_tape.strip("B") == bin(count)[2:]
+
+    @pytest.mark.parametrize("count", [40, 64, 100, 127])
+    def test_unary_to_binary_arbitrary_length(self, count):
+        """Yeni tasarim sinirsiz uzunluga uygundur; buyuk girdilerle dogrula."""
+        result = run_machine("unary_to_binary.yaml", "1" * count, max_steps=80000)
         assert result.accepted is True
         assert result.final_tape.strip("B") == bin(count)[2:]
 
@@ -156,6 +163,24 @@ class TestExpandedMachineCoverage:
         left_bits = bin(left)[2:]
         right_bits = bin(right)[2:]
         result = run_machine("binary_compare.yaml", f"{left_bits}#{right_bits}")
+        assert result.accepted is (left > right)
+        if left <= right:
+            assert result.reason == "reject"
+
+    @pytest.mark.parametrize(("left", "right"), [
+        (16, 15), (16, 16), (31, 0), (31, 31), (32, 31),
+        (50, 49), (100, 99),
+        (170, 169), (255, 254), (255, 255),
+        (512, 511), (1023, 1022), (1024, 1023),
+        (15, 16), (0, 31), (254, 255), (1023, 1024),
+    ])
+    def test_binary_compare_arbitrary_length(self, left, right):
+        """Yeni tasarim 4-bit otesini de destekler; esit/farkli uzunlukta 5+ bit ciftleri."""
+        left_bits = bin(left)[2:]
+        right_bits = bin(right)[2:]
+        result = run_machine(
+            "binary_compare.yaml", f"{left_bits}#{right_bits}", max_steps=50000
+        )
         assert result.accepted is (left > right)
         if left <= right:
             assert result.reason == "reject"
