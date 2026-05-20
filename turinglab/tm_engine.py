@@ -96,14 +96,25 @@ class Tape:
         """
         Şeridi okunabilir string olarak döndürür.
         Kafa konumunu [sembol] şeklinde işaretler.
-        Yalnızca anlamlı aralığı (min..max) + kafa konumunu kapsar.
+
+        Görüntülenen aralık spec'in verbose örneklerine uyumlu olacak şekilde
+        ayarlanmıştır: rightmost yazılı hücreden bir sağa kadar trailing blank
+        gösterilir; head bu aralığın dışındaysa head konumuna kadar genişler.
         """
         if not self._cells:
-            positions = [head]
+            lo, hi = head, head
         else:
-            lo = min(min(self._cells.keys()), head)
-            hi = max(max(self._cells.keys()), head)
-            positions = list(range(lo, hi + 1))
+            leftmost = min(self._cells.keys())
+            rightmost = max(self._cells.keys())
+            lo = min(leftmost, head)
+            # Rightmost hücre zaten blank ise extra trailing eklemeye gerek
+            # yok (cift B oluşturmamak için). Aksi halde rightmost+1'e kadar
+            # bir trailing blank göster.
+            if self.read(rightmost) == self.blank:
+                hi = max(rightmost, head)
+            else:
+                hi = max(rightmost + 1, head)
+        positions = list(range(lo, hi + 1))
 
         parts = []
         for p in positions:
@@ -324,7 +335,12 @@ class SingleTapeTM:
         )
 
         if verbose:
-            self._print_step(0, current_state, tape, head, move="—")
+            # Spec ile uyumlu: "Hareket" sutunu o adimda UYGULANACAK hareketi
+            # gosterir. Step 0 icin sonraki transition'a peek et.
+            first_symbol = tape.read(head)
+            first_transition = self._delta.get((current_state, first_symbol))
+            first_move = first_transition.move if first_transition else "—"
+            self._print_step(0, current_state, tape, head, first_move)
 
         for step in range(1, max_steps + 1):
             symbol = tape.read(head)
@@ -377,7 +393,13 @@ class SingleTapeTM:
             )
 
             if verbose:
-                self._print_step(step, current_state, tape, head, transition.move)
+                # Spec uyumu: "Hareket" sutunu BU konfigurasyonda uygulanacak
+                # hareket. Mevcut state + read'in altinda bir sonraki
+                # transition'a bakiyoruz. Terminal durumlarda "—".
+                next_symbol = tape.read(head)
+                next_transition = self._delta.get((current_state, next_symbol))
+                next_move = next_transition.move if next_transition else "—"
+                self._print_step(step, current_state, tape, head, next_move)
 
             # Kabul / red durumu kontrolü
             if current_state in self.accept_states:

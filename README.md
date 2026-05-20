@@ -165,6 +165,10 @@ turinglab/
 
 Motor negatif indisleri destekler. Bu nedenle kafa sola hareket ettiğinde Python listesindeki `-1` gibi yanlış bir indeksleme problemi oluşmaz. Aşırı uzun veya hatalı çalışan makineler için `max_steps` sınırı kullanılır.
 
+### `RunResult.reason` Alanı
+
+Kitapçık üç temel `reason` değeri tanımlar: `"accept"`, `"no_transition"`, `"timeout"`. Bu motor ek olarak isteğe bağlı `reject_states` listesi destekler ve makine bu durumlardan birine girerse `reason="reject"` döner. Bu, deterministik makinelerde "açık ret" tasarımına izin verir; örneğin `binary_compare` makinesi eşit sayılar için `q_reject` durumuna geçerek `reason="reject"` üretir. Bir makinede `reject_states` boş bırakılırsa motor sadece kitapçığın belirttiği üç reason değerini kullanır.
+
 ---
 
 ## Demo Video
