@@ -57,8 +57,8 @@ Bölüm 2 kapsamında dört Turing makinesi `machines/` klasörüne eklendi:
 
 | Makine | Dosya | Davranış |
 | --- | --- | --- |
-| Unary to Binary | `machines/unary_to_binary.yaml` | 0-16 arası unary girdiyi binary çıktıya çevirir. |
-| Binary Compare | `machines/binary_compare.yaml` | 0-15 arası canonical binary `x#y` çiftlerinde `x > y` ise kabul eder. |
+| Unary to Binary | `machines/unary_to_binary.yaml` | Herhangi bir uzunluktaki unary girdiyi binary'e çevirir (9 durum, sınırsız uzunluk). |
+| Binary Compare | `machines/binary_compare.yaml` | Canonical binary `x#y` çiftlerinde `x > y` ise kabul eder; bit sayısı serbest (13 durum, iki fazlı). |
 | String Copy | `machines/string_copy.yaml` | `a`/`b` dizgisini `w#w` formatında kopyalar. |
 | Student Choice | `machines/student_choice.yaml` | Binary girdinin 4'e bölünüp bölünmediğini test eder. |
 
@@ -83,6 +83,10 @@ makine = SingleTapeTM.from_yaml("machines/binary_compare.yaml")
 sonuc = makine.run("1100#1011", max_steps=2000)
 
 print(sonuc.accepted) # True, cunku 12 > 11
+
+# Sinirsiz uzunluk de destekleniyor:
+sonuc2 = makine.run("10101010#10101001", max_steps=50000)
+print(sonuc2.accepted) # True, cunku 170 > 169
 ```
 
 ### Örnek 3: 4'e Bölünebilirlik
@@ -112,11 +116,13 @@ Sadece Bölüm 2 testleri:
 pytest tests/test_machines.py -q
 ```
 
-17 Mayıs final kontrolünde test sonucu:
+20 Mayıs yeniden tasarım sonrası test sonucu:
 
 ```text
-344 passed
+381 passed
 ```
+
+TM-1 ve TM-2'nin 20 Mayıs'taki yeniden tasarım hikayesi için bkz. [`docs/design_notes.md`](docs/design_notes.md) sondaki "Yeniden Tasarım Notu" bölümü.
 
 ---
 
