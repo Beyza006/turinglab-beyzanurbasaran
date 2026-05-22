@@ -173,7 +173,8 @@ Kitapçık üç temel `reason` değeri tanımlar: `"accept"`, `"no_transition"`,
 
 ## Demo Video
 
-Bölüm 3'te eklenecek.
+Projeyi tanıtan ekran kaydı videosu: [`docs/demo_video.mp4`](docs/demo_video.mp4).
+Video, motor verbose modunun spec ile uyumlu çıktısını ve tasarladığım iki makinenin (unary_to_binary, binary_compare) çalışmasını gösterir.
 
 ---
 

@@ -81,9 +81,9 @@
 
 ## Kayıt Sonrası
 
-- [ ] MP4 olarak dışa aktar (H.264 codec)
-- [ ] YouTube'a unlisted yükle
-- [ ] README.md'deki "Demo Video" bölümüne linki ekle
-- [ ] Linki test et (incognito modda çalışıyor mu?)
-- [ ] `git add README.md && git commit -m "demo video baglantisi eklendi"`
+- [ ] MP4 olarak dışa aktar (H.264 codec, 100 MB altında olacak şekilde)
+- [ ] Dosyayı `docs/demo_video.mp4` olarak repo'ya kopyala
+- [ ] README.md'deki "Demo Video" bölümünü dosyaya referans verecek şekilde güncelle
+- [ ] `git add docs/demo_video.mp4 README.md && git commit -m "Bolum 3: demo videosu eklendi ve README guncellendi"`
+- [ ] `git push`
 - [ ] `git tag final && git push --tags`
